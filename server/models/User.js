@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     ],
     default: [],
   },
+  isUser: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 module.exports = mongoose.model("Users", userSchema);

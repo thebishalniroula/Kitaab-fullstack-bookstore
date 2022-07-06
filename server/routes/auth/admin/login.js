@@ -4,6 +4,7 @@ const passport = require("passport");
 const { generateOtp, sendotp } = require("../../../helper/otpVerification");
 const Admin = require("../../../models/Admin");
 const bcrypt = require("bcrypt");
+const { session } = require("passport");
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
@@ -13,8 +14,7 @@ router.post("/", async (req, res) => {
     const isValid = await bcrypt.compare(password, adminDB.password);
     if (isValid) {
       const otp = generateOtp();
-      req.flash("otp", otp.toString());
-      console.log(otp.toString());
+      req.session.otp = otp.toString();
       sendotp(email, otp);
       return res.status(200).json({
         status: "success",
@@ -36,7 +36,7 @@ router.post(
   "/verify-otp",
   (req, res, next) => {
     const { email, password, otp: otpReceived } = req.body;
-    const otpSent = req.flash("otp")[0];
+    const otpSent = req.session.otp;
     if (otpSent === otpReceived) {
       return next();
     } else
@@ -55,7 +55,7 @@ router.post(
 );
 
 router.post("/resend-otp", (req, res, next) => {
-  const { email, password, otp: otpReceived } = req.body;
+  const { email, password } = req.body;
   const otp = generateOtp();
   req.flash("otp", otp.toString());
   console.log(otp.toString());
