@@ -18,8 +18,9 @@ const userSchema = new mongoose.Schema({
   cartItems: {
     type: [
       {
-        productId: {
-          type: String,
+        bookId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Book",
           required: true,
         },
         quantity: {
@@ -36,4 +37,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("User", userSchema);

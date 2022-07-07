@@ -14,7 +14,10 @@ passport.use(
       try {
         console.log("user-local");
 
-        const userDB = await User.findOne({ email });
+        const userDB = await User.findOne({ email }).populate(
+          "cartItems.bookId",
+          "title price image stock"
+        );
         if (userDB) {
           const isValid = await bcrypt.compare(password, userDB.password);
           if (isValid) {

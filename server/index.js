@@ -46,6 +46,15 @@ app.use("/api/auth/admin/logout", require("./routes/auth/admin/logout"));
 app.use("/api/dashboard/user", require("./routes/dashboard/user"));
 app.use("/api/dashboard/admin", require("./routes/dashboard/admin"));
 
+//handling books api
+app.use("/api/books/", require("./routes/api/books"));
+
+//adding, removing, editing books
+app.use("/api/books/admin", require("./routes/api/editBooks"));
+
+//cart
+app.use("/api/cart", require("./routes/api/cart"));
+
 //Starting server
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server running on port 3000");
