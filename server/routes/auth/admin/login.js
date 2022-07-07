@@ -57,8 +57,7 @@ router.post(
 router.post("/resend-otp", (req, res, next) => {
   const { email, password } = req.body;
   const otp = generateOtp();
-  req.flash("otp", otp.toString());
-  console.log(otp.toString());
+  req.session.otp = otp.toString();
   sendotp(email, otp);
   return res.status(200).json({
     status: "success",
