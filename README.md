@@ -1,7 +1,5 @@
-# full-stack-single-seller-ecommerce
-This is a full stack single seller ecommerce website that is being built using express and nextjs
-
 # Project: full stack single seller ecommerce
+This is a full stack single seller ecommerce website that is being built using express and nextjs
 
 ## End-point: user login
 ### Method: POST
