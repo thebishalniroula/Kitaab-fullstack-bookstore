@@ -12,11 +12,14 @@ router.use((req, res, next) => {
 });
 
 //get all books
+// ----> api/books/
 router.get("/", async (req, res) => {
-  const books = await Book.find().select(
-    "title price category description stock image"
-  );
-  res.status(200).json(books);
+  try {
+    const books = await Book.find();
+    res.status(200).json({ status: "success", message: books });
+  } catch (error) {
+    res.status(200).json({ status: "error", message: error });
+  }
 });
 
 //get book by id

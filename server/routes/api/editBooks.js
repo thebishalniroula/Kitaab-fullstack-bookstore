@@ -102,7 +102,7 @@ router.patch(
 //get book by category
 router.delete("/:bookId", async (req, res) => {
   const id = req.params.bookId;
-  const books = await Book.findByIdAndDelete({ id });
+  const books = await Book.findByIdAndDelete(id);
   res.status(200).json(books);
 });
 

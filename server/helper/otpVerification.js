@@ -22,7 +22,7 @@ const sendotp = async (email, otp) => {
       console.log("Server is ready to take your messages");
     }
   });
-  let info = await transporter.sendMail({
+  await transporter.sendMail({
     from: `"OTP verification" <${process.env.EMAIL}>`,
     to: email,
     subject: "Please verify your OTP",

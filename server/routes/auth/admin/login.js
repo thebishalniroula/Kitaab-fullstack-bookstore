@@ -4,7 +4,6 @@ const passport = require("passport");
 const { generateOtp, sendotp } = require("../../../helper/otpVerification");
 const Admin = require("../../../models/Admin");
 const bcrypt = require("bcrypt");
-const { session } = require("passport");
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
