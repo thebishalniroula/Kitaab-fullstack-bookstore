@@ -6,6 +6,7 @@ router.post("/", passport.authenticate("user"), (req, res) => {
   res.status(200).json({
     status: "success",
     message: `You have been logged in as ${req.user.name}`,
+    user: req.user,
   });
 });
 
