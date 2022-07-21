@@ -49,6 +49,10 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  isPopularNow: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Book", bookSchema);

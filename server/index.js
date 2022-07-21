@@ -8,9 +8,11 @@ const MongoStore = require("connect-mongo");
 require("./strategies/local");
 
 const app = express();
-
-dotenv.config();
-
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  dotenv.config();
+  console.log(process.env.NODE_ENV);
+}
+app.use(require("cors")());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,

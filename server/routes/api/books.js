@@ -13,6 +13,10 @@ router.use((req, res, next) => {
 
 //get all books
 // ----> api/books/
+router.get("/popularnow", async (req, res) => {
+  const books = await Book.find({ isPopularNow: true });
+  res.status(200).json({ status: "success", message: books });
+});
 router.get("/", async (req, res) => {
   try {
     const books = await Book.find();
@@ -26,15 +30,14 @@ router.get("/", async (req, res) => {
 router.get("/:bookId", async (req, res) => {
   const id = req.params.bookId;
   const book = await Book.findById(id).populate("reviews.userId", "name email");
-  res.status(200).json(book);
+  res.status(200).json({ status: "success", message: book });
 });
 
 //get book by category
 router.get("/category/:category", async (req, res) => {
   const category = req.params.category;
-  console.log(category);
   const books = await Book.find({ category });
-  res.status(200).json(books);
+  res.status(200).json({ status: "success", message: books });
 });
 
 module.exports = router;
