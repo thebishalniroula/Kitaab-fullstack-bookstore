@@ -36,7 +36,6 @@ This is a full stack single seller ecommerce website that is being built using e
 
 ```json
 {
- "name":"Bishal Niroula",
  "email":"bishal@bishal.com",
  "password":"bishal12345"   
 }
@@ -291,24 +290,6 @@ This is a full stack single seller ecommerce website that is being built using e
         "image": "/images/books/default.png",
         "stock": 5
     },
-    {
-        "_id": "62c72dc5d675b843c2dd50ab",
-        "title": "Title of the book 5",
-        "price": 201,
-        "category": "EDUCATIONAL",
-        "description": "This is the description of the book.",
-        "image": "/images/books/default.png",
-        "stock": 5
-    },
-    {
-        "_id": "62c72de0d675b843c2dd50af",
-        "title": "Title of the book 5",
-        "price": 201,
-        "category": "EDUCATIONAL",
-        "description": "This is the description of the book.",
-        "image": "/images/books/default.png",
-        "stock": 5
-    }
 ]
 ```
 
@@ -364,23 +345,6 @@ This is a full stack single seller ecommerce website that is being built using e
         "__v": 0
     },
     {
-        "_id": "62c6ea460fa77a6bb553d770",
-        "title": "Title of the book 3",
-        "price": 201,
-        "category": "EDUCATIONAL",
-        "description": "This is the description of the book.",
-        "image": "/images/books/default.png",
-        "reviews": [
-            {
-                "userId": "62c48d92e348918233fb65a2",
-                "review": "Very nice book",
-                "_id": "62c6da7344883da20c123f5c"
-            }
-        ],
-        "stock": 5,
-        "__v": 0
-    },
-    {
         "_id": "62c6ea9e0fa77a6bb553d774",
         "title": "Title of the book 4",
         "price": 201,
@@ -431,17 +395,6 @@ This is a full stack single seller ecommerce website that is being built using e
         "stock": 5,
         "__v": 0
     },
-    {
-        "_id": "62c72de0d675b843c2dd50af",
-        "title": "Title of the book 5",
-        "price": 201,
-        "category": "EDUCATIONAL",
-        "description": "This is the description of the book.",
-        "image": "/images/books/default.png",
-        "stock": 5,
-        "reviews": [],
-        "__v": 0
-    }
 ]
 ```
 
