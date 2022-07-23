@@ -28,7 +28,7 @@ const Slider = ({ popularBooks }) => {
       setBooks(newBooks);
     })();
   }, [user]);
-  const addToCart = async (id) => {
+  const addToCart = async (id, title, image, price) => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/add/${id}`,
@@ -43,7 +43,10 @@ const Slider = ({ popularBooks }) => {
         setUser((prev) => {
           return {
             ...prev,
-            cartItems: [...prev.cartItems, { bookId: id, quantity: 1 }],
+            cartItems: [
+              ...prev.cartItems,
+              { bookId: id, title, image, price, quantity: 1 },
+            ],
           };
         });
       }
@@ -52,7 +55,6 @@ const Slider = ({ popularBooks }) => {
     }
   };
 
-  console.log("hello");
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Popular now</h3>
@@ -69,14 +71,18 @@ const Slider = ({ popularBooks }) => {
                 />
               </div>
               <p className={styles.bookTitle}>{book.title}</p>
-              <p className={styles.author}>{book.authors[0]}</p>
+              {book?.authors && (
+                <p className={styles.author}>{book.authors[0]}</p>
+              )}
 
               {book.isInCart ? (
                 <p className={styles.addedToCart}>Added to cart</p>
               ) : (
                 <p
                   className={styles.addToCart}
-                  onClick={() => addToCart(book._id)}
+                  onClick={() =>
+                    addToCart(book._id, book.title, book.image, book.price)
+                  }
                 >
                   Add to cart
                 </p>

@@ -2,9 +2,12 @@ import styles from "../styles/Nav.module.css";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
 const Nav = () => {
   const router = useRouter();
   const { user, setUser } = useContext(UserContext);
+  console.log("user", user);
   const logout = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/user/logout`,
@@ -22,7 +25,9 @@ const Nav = () => {
   return (
     <>
       <nav className={styles.nav}>
-        <div className={styles.logo}>Bookly</div>
+        <Link href={"/"}>
+          <div className={styles.logo}>Bookly</div>
+        </Link>
         <div className={styles.searchWrapper}>
           <div className={styles.search}>
             <input
@@ -36,7 +41,15 @@ const Nav = () => {
           <div className={styles.user}>
             {/* <Image src={userPng} layout="fill" /> */}
           </div>
-          <div className={styles.cart}>{user.cartItems.length}</div>
+          {/* {user.cartItems.length} */}
+          <Link href={"/cart"}>
+            <div
+              className={styles.cart}
+              data-content={`${user.cartItems.length}`}
+            >
+              <Image src={"/cart.png"} height={35} width={35}></Image>
+            </div>
+          </Link>
           {user.isUser && <p onClick={logout}>Logout</p>}
         </div>
       </nav>

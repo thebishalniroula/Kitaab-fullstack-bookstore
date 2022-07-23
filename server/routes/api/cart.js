@@ -24,7 +24,13 @@ router.post("/add/:id", async (req, res) => {
   //   user.cartItems[index].quantity++;
   // } else user.cartItems.push({ book, quantity: 1 });
 
-  user.cartItems.push({ bookId, book, quantity: 1 });
+  user.cartItems.push({
+    bookId,
+    image: book.image,
+    title: book.title,
+    price: book.price,
+    quantity: 1,
+  });
   try {
     const userDb = await User.findByIdAndUpdate(user.id, user);
     if (userDb) {

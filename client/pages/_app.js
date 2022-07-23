@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }) {
         }
       );
       const data = await res.json();
-      console.log(data);
       if (data?.user) {
         setUser(data.user);
       } else if (!router.pathname.includes("/register")) router.push("/login");
@@ -27,7 +26,7 @@ function MyApp({ Component, pageProps }) {
   if (!user) {
     return (
       <UserContext.Provider value={{ user, setUser }}>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </UserContext.Provider>
     );
   }

@@ -23,9 +23,7 @@
   color: #989898;
   max-width: 30rem;
 }
-.text {
-  width: 30rem;
-}
+
 .illustrations {
   width: 30%;
   height: 100%;
@@ -43,6 +41,7 @@
   font-weight: 500;
   font-size: 1rem;
   padding: 0.5rem 2rem;
+  cursor: pointer;
 }
 .secondary {
   border: none;
@@ -53,6 +52,7 @@
   font-size: 1rem;
   color: #6d6d6d;
   padding: 0.5rem 2rem;
+  cursor: pointer;
 }
 .image {
   width: 100%;
@@ -60,5 +60,12 @@
 @media (max-width: 1100px) {
   .illustrations {
     display: none;
+  }
+  .title {
+    max-width: 100%;
+  }
+  .text p {
+    color: #989898;
+    max-width: 25rem;
   }
 }

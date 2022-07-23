@@ -5,7 +5,9 @@
 }
 .logo {
   flex: 1;
+  cursor: pointer;
 }
+
 .searchWrapper {
   flex: 7;
   display: flex;
@@ -63,9 +65,23 @@
   width: 2rem;
   position: relative;
   border-radius: 999px;
-  background-color: #f78f02;
+  cursor: pointer;
 }
-
+.cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart::after {
+  content: attr(data-content);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  color: white;
+  font-weight: 600;
+}
 .logo {
   font-size: 1.25rem;
   color: rgb(103, 101, 101);
