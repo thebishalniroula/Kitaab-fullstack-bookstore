@@ -12,7 +12,13 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   dotenv.config();
   console.log(process.env.NODE_ENV);
 }
-app.use(require("cors")());
+app.use(
+  require("cors")({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -57,7 +63,10 @@ app.use("/api/books/admin", require("./routes/api/editBooks"));
 //cart
 app.use("/api/cart", require("./routes/api/cart"));
 
+//is logged in?
+app.use("/api/isLoggedIn", require("./routes/auth/user/isAuthenticated"));
+
 //Starting server
 app.listen(process.env.PORT || 3000, () => {
-  console.log("Server running on port 3000");
+  console.log("Server running on port", process.env.PORT || 3000);
 });

@@ -1,0 +1,55 @@
+.container {
+  margin: 2rem 5%;
+  /* margin: 1rem 0 1rem 5%; */
+}
+.title {
+  color: #5e5c5c;
+  font-size: 1.25rem;
+}
+.books {
+  display: flex;
+  gap: 1rem;
+  overflow-y: scroll;
+  margin-top: 1rem;
+}
+
+.books::-webkit-scrollbar {
+  display: none;
+}
+
+.bookTitle {
+  /* display: none; */
+  /* font-weight: 600; */
+  font-size: 1rem;
+  line-height: 1.3rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.author {
+  color: #b9babd;
+  font-size: 0.8rem;
+}
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  background-color: #b9babd;
+  height: 15rem;
+  width: 10rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.addToCart {
+  color: #e98c0b;
+  cursor: pointer;
+}
+.addToCart:hover {
+  text-decoration: underline;
+}
+.addedToCart {
+  cursor: pointer;
+  color: #5e5c5c;
+}

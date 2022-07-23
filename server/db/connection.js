@@ -3,5 +3,5 @@ module.exports.connectdb = (mongoose) =>
     if (err) {
       return console.log(err);
     }
-    console.log("Connected to db");
+    console.log("Connected to database");
   });

@@ -12,13 +12,9 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        console.log("user-local");
-
-        const userDB = await User.findOne({ email }).populate(
-          "cartItems.bookId",
-          "title price image stock"
-        );
+        const userDB = await User.findOne({ email });
         if (userDB) {
+          console.log(userDB);
           const isValid = await bcrypt.compare(password, userDB.password);
           if (isValid) {
             console.log("user validated");

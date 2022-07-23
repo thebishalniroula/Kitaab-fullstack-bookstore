@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const express = require("express");
 const router = express.Router();
 const checkIfItemExistsInCart = require("../../helper/checkIfItemExistsInCart");
+const Book = require("../../models/Book");
 
 router.use((req, res, next) => {
   if (req.user && req.user?.isUser) {
@@ -16,14 +17,14 @@ router.use((req, res, next) => {
 router.post("/add/:id", async (req, res) => {
   const bookId = req.params.id;
   const user = req.user;
+  const book = await Book.findById(bookId);
+  // const { exists, index } = checkIfItemExistsInCart(req.user.cartItems, bookId);
+  // if (exists) {
+  //   console.log("item exists");
+  //   user.cartItems[index].quantity++;
+  // } else user.cartItems.push({ book, quantity: 1 });
 
-  const { exists, index } = checkIfItemExistsInCart(req.user.cartItems, bookId);
-
-  if (exists) {
-    console.log("item exists");
-    user.cartItems[index].quantity++;
-  } else user.cartItems.push({ bookId, quantity: 1 });
-
+  user.cartItems.push({ bookId, book, quantity: 1 });
   try {
     const userDb = await User.findByIdAndUpdate(user.id, user);
     if (userDb) {

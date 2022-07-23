@@ -13,12 +13,12 @@ const validationMiddlewares = [
     .withMessage("Please enter a valid email address"),
   check("name")
     .notEmpty()
-    .withMessage("Email cannot be empty")
+    .withMessage("Name cannot be empty")
     .contains(" ")
     .withMessage("Please enter your full name"),
   check("password")
     .isLength({ min: 6 })
-    .withMessage("Please must be at least 6 characters."),
+    .withMessage("Passsword must be at least 6 characters."),
 ];
 
 //Registering new user

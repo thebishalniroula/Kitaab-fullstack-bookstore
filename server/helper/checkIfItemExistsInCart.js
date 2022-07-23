@@ -1,4 +1,5 @@
 const checkIfItemExistsInCart = (cart, bookId) => {
+  console.log("BOOK-ID", cart);
   const match = cart.filter((item, index) => {
     if (item.bookId.toString() === bookId) {
       item["index"] = index;
