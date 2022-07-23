@@ -1,10 +1,11 @@
 import styles from "../styles/Nav.module.css";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { UserContext } from "../context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 const Nav = () => {
+  const navRef = useRef(null);
   const router = useRouter();
   const { user, setUser } = useContext(UserContext);
   console.log("user", user);
@@ -22,9 +23,17 @@ const Nav = () => {
       setUser(null);
     }
   };
+  const observer = new IntersectionObserver(
+    ([e]) =>
+      e.target.classList.toggle(`${styles.isPinned}`, e.intersectionRatio < 1),
+    { threshold: [1] }
+  );
+  if (navRef.current) {
+    observer.observe(navRef.current);
+  }
   return (
     <>
-      <nav className={styles.nav}>
+      <nav className={styles.nav} ref={navRef}>
         <Link href={"/"}>
           <div className={styles.logo}>Bookly</div>
         </Link>
@@ -44,13 +53,18 @@ const Nav = () => {
           {/* {user.cartItems.length} */}
           <Link href={"/cart"}>
             <div
+              title="Cart"
               className={styles.cart}
               data-content={`${user.cartItems.length}`}
             >
               <Image src={"/cart.png"} height={35} width={35}></Image>
             </div>
           </Link>
-          {user.isUser && <p onClick={logout}>Logout</p>}
+          {user.isUser && (
+            <div className={styles.cart} onClick={logout} title="Logout">
+              <Image src={"/logout.png"} height={20} width={20}></Image>
+            </div>
+          )}
         </div>
       </nav>
       {/* Linksssssssssss--------- */}

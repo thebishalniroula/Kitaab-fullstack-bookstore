@@ -2,6 +2,13 @@
   display: flex;
   padding: 2rem 5%;
   justify-content: space-between;
+  position: sticky;
+  top: -0.01rem;
+  transition: 0.2s padding;
+}
+.nav.isPinned {
+  padding: 0.7rem 5%;
+  background-color: white;
 }
 .logo {
   flex: 1;
@@ -56,7 +63,7 @@
 .userInfo {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: 1.5rem;
   flex: 1;
 }
 .cart,
