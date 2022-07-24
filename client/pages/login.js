@@ -67,8 +67,8 @@ const login = () => {
           <form method="POST">
             <input
               name="name"
-              type="Email"
-              placeholder="email"
+              type="email"
+              placeholder="Email"
               ref={emailRef}
             />
             <input

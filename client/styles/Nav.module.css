@@ -74,6 +74,26 @@
   border-radius: 999px;
   cursor: pointer;
 }
+.userDetails {
+  position: absolute;
+  top: 100%;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  width: 15rem;
+  padding: 1rem;
+  background-color: #f4e8de;
+  border-radius: 10px;
+}
+.show {
+  display: none;
+}
+.userDetails p {
+  color: #555555;
+  font-weight: 500;
+}
+.userDetails p span {
+  font-weight: 400;
+}
 .cart {
   position: relative;
   display: flex;

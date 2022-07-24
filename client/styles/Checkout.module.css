@@ -58,6 +58,12 @@
 
   justify-content: space-between;
 }
+.buttons h3 {
+  color: #f78f02;
+}
+.buttons h3 span {
+  color: #555555;
+}
 .primary {
   border: none;
   border-radius: 50px;

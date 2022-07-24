@@ -96,10 +96,12 @@ const cart = () => {
       {cart.length > 0 && (
         <div className={styles.buttons}>
           <h3>
-            Total:
-            {cart.reduce((accumulator, currentValue) => {
-              return accumulator + currentValue.price * currentValue.quantity;
-            }, 0)}
+            Total:{" "}
+            <span>
+              {cart.reduce((accumulator, currentValue) => {
+                return accumulator + currentValue.price * currentValue.quantity;
+              }, 0)}
+            </span>
           </h3>
           <button className={styles.primary}>Checkout</button>
         </div>
