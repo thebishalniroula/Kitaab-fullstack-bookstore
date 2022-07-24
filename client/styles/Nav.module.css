@@ -81,8 +81,11 @@
   font-size: 1rem;
   width: 15rem;
   padding: 1rem;
-  background-color: #f4e8de;
+  background-color: #eddbcc;
   border-radius: 10px;
+}
+.userDetails h5 {
+  color: #555;
 }
 .show {
   display: none;

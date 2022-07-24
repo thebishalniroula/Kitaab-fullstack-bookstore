@@ -31,7 +31,9 @@ const Nav = () => {
   if (navRef.current) {
     observer.observe(navRef.current);
   }
-
+  if (showUserDetails) {
+    window.onmousedown = (e) => setShowUserDetails(() => false);
+  }
   return (
     <>
       <nav className={styles.nav} ref={navRef}>
@@ -61,6 +63,7 @@ const Nav = () => {
                   !showUserDetails && styles.show
                 }`}
               >
+                <h5>Signed in as</h5>
                 <p>
                   Name: <span>{user.name}</span>
                 </p>
