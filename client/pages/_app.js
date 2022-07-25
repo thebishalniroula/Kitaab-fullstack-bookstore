@@ -9,17 +9,22 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/isLoggedIn`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-      const data = await res.json();
-      if (data?.user) {
-        setUser(data.user);
-      } else if (!router.pathname.includes("/register")) router.push("/login");
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/isLoggedIn`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        const data = await res.json();
+        if (data?.user) {
+          setUser(data.user);
+        } else if (!router.pathname.includes("/register"))
+          router.push("/login");
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
 

@@ -6,25 +6,7 @@ const cart = () => {
   const { user, setUser } = useContext(UserContext);
   const [cart, setCart] = useState([]);
   useEffect(() => {
-    // user?.cartItems.map(async (item) => {
-    //   const res = await fetch(
-    //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/${item.bookId}`,
-    //     {
-    //       method: "GET",
-    //       credentials: "include",
-    //     }
-    //   );
-    //   const data = await res.json();
-    //   data.message["quantity"] = item.quantity;
-
-    //   setCart((prev) => {
-    //     const newCart = [...prev, data.message];
-    //     return newCart;
-    //   });
-    // });
-
     if (user) {
-      console.log("caritems", user.cartItems);
       setCart(() => user.cartItems);
     }
   }, [user]);

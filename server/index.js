@@ -10,11 +10,10 @@ require("./strategies/local");
 const app = express();
 if (process.env.NODE_ENV !== "PRODUCTION") {
   dotenv.config();
-  console.log(process.env.NODE_ENV);
 }
 app.use(
   require("cors")({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })

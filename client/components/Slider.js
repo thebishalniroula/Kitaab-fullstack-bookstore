@@ -1,7 +1,9 @@
 import styles from "../styles/Slider.module.css";
 import Image from "next/image";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
+import { addToCart } from "../utils";
 const Slider = ({ popularBooks }) => {
   const { user, setUser } = useContext(UserContext);
   const [books, setBooks] = useState([]);
@@ -19,7 +21,6 @@ const Slider = ({ popularBooks }) => {
         let bookCopy = book;
         user.cartItems.map((item) => {
           if (item.bookId === book._id) {
-            console.log("trur");
             bookCopy["isInCart"] = true;
           }
         });
@@ -28,32 +29,6 @@ const Slider = ({ popularBooks }) => {
       setBooks(newBooks);
     })();
   }, [user]);
-  const addToCart = async (id, title, image, price) => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/add/${id}`,
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
-      const data = await res.json();
-      console.log(data);
-      if (data.status === "success") {
-        setUser((prev) => {
-          return {
-            ...prev,
-            cartItems: [
-              ...prev.cartItems,
-              { bookId: id, title, image, price, quantity: 1 },
-            ],
-          };
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -62,26 +37,35 @@ const Slider = ({ popularBooks }) => {
         {books.map((book) => {
           return (
             <div className={styles.book} key={book._id}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={book.image}
-                  height={200}
-                  width={133}
-                  layout="fill"
-                />
-              </div>
-              <p className={styles.bookTitle}>{book.title}</p>
-              {book?.authors && (
-                <p className={styles.author}>{book.authors[0]}</p>
-              )}
-
+              <Link href={`/book/${book._id}`}>
+                <div>
+                  <div className={styles.imageWrapper}>
+                    <Image
+                      src={book.image}
+                      height={200}
+                      width={133}
+                      layout="fill"
+                    />
+                  </div>
+                  <p className={styles.bookTitle}>{book.title}</p>
+                  {book?.authors && (
+                    <p className={styles.author}>{book.authors[0]}</p>
+                  )}
+                </div>
+              </Link>
               {book.isInCart ? (
                 <p className={styles.addedToCart}>Added to cart</p>
               ) : (
                 <p
                   className={styles.addToCart}
                   onClick={() =>
-                    addToCart(book._id, book.title, book.image, book.price)
+                    addToCart(
+                      book._id,
+                      book.title,
+                      book.image,
+                      book.price,
+                      setUser
+                    )
                   }
                 >
                   Add to cart

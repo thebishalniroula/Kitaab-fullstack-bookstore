@@ -14,7 +14,6 @@ passport.use(
       try {
         const userDB = await User.findOne({ email });
         if (userDB) {
-          console.log(userDB);
           const isValid = await bcrypt.compare(password, userDB.password);
           if (isValid) {
             console.log("user validated");
@@ -35,7 +34,6 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        console.log("admin-local");
         const adminDB = await Admin.findOne({ email });
         if (adminDB) {
           const isValid = await bcrypt.compare(password, adminDB.password);

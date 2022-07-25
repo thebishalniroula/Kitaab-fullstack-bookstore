@@ -86,7 +86,6 @@ router.patch(
     const id = req.params.bookId;
     try {
       const book = await Book.findByIdAndUpdate(id, req.body, { new: true });
-      console.log(book);
       if (book) {
         res.status(200).json(book);
       } else

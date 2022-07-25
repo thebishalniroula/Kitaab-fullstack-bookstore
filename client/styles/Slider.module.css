@@ -16,7 +16,9 @@
 .books::-webkit-scrollbar {
   display: none;
 }
-
+.book {
+  cursor: pointer;
+}
 .bookTitle {
   /* display: none; */
   /* font-weight: 600; */

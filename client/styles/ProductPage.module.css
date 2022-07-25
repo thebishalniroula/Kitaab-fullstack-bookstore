@@ -1,0 +1,65 @@
+.container {
+  margin: 2rem 5%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: #f4e8de;
+  border-radius: 10px;
+}
+
+.bookDetails {
+  width: 70%;
+}
+
+.imageWrapper {
+  height: 21rem;
+  width: 14rem;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.image {
+  display: flex;
+  align-items: center;
+}
+.title {
+  color: #545353;
+}
+.authors {
+  color: #b9babd;
+  font-size: 0.9rem;
+}
+.description {
+  color: #545353;
+  margin-top: 0.5rem;
+}
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.primary {
+  border: none;
+  border-radius: 50px;
+  background-color: #f78f02;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+.secondary {
+  border: none;
+  border-radius: 50px;
+  border: 2px solid #f78f02;
+  background: none;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #6d6d6d;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+.addedToCart {
+  background-color: #6d6d6d;
+}

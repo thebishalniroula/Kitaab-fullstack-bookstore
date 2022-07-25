@@ -15,7 +15,6 @@ router.use((req, res, next) => {
 // ----> api/books/
 router.get("/popularnow", async (req, res) => {
   const books = await Book.find({ isPopularNow: true });
-  console.log(books);
   return res.status(200).json({ status: "success", message: books });
 });
 router.get("/", async (req, res) => {
