@@ -35,6 +35,26 @@ const cart = () => {
       console.log(error);
     }
   };
+  const checkout = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/payment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(
+        cart.map((item) => {
+          return { id: item.bookId, quantity: item.quantity };
+        })
+      ),
+    });
+    const { status, message } = await res.json();
+    if (status === "success") {
+      window.location = message.url;
+    } else {
+      console.log(message);
+    }
+  };
 
   return (
     <>
@@ -49,7 +69,6 @@ const cart = () => {
         {cart.length > 0 &&
           cart[0]?.image &&
           cart.map((item) => {
-            console.log(item);
             return (
               <div className={styles.item}>
                 <div className={styles.itemDetails}>
@@ -85,7 +104,14 @@ const cart = () => {
               }, 0)}
             </span>
           </h3>
-          <button className={styles.primary}>Checkout</button>
+          <button
+            className={styles.primary}
+            onClick={() => {
+              checkout();
+            }}
+          >
+            Checkout
+          </button>
         </div>
       )}
     </>

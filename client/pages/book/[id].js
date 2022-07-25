@@ -47,7 +47,7 @@ const ProductPage = () => {
     <>
       <div className={styles.container}>
         <div className={styles.bookDetails}>
-          <h1 className={styles.title}>{book.title}</h1>
+          <h2 className={styles.title}>{book.title}</h2>
           <p className={styles.authors}>
             By <span>{book?.authors?.join(", ")}</span>
           </p>

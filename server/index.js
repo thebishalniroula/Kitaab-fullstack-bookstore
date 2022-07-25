@@ -58,6 +58,9 @@ app.use("/api/books/admin", require("./routes/api/editBooks"));
 //cart
 app.use("/api/cart", require("./routes/api/cart"));
 
+//payment
+app.use("/api/payment", require("./routes/paymentRoutes/stripe"));
+
 //is logged in?
 app.use("/api/isLoggedIn", require("./routes/auth/user/isAuthenticated"));
 
