@@ -4,6 +4,9 @@ import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { addToCart } from "../../utils";
 import { UserContext } from "../../context/UserContext";
+import Reviews from "../../components/Reviews";
+import Excerpt from "../../components/Excerpt";
+import WriteReview from "../../components/WriteReview";
 const ProductPage = () => {
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
@@ -23,7 +26,7 @@ const ProductPage = () => {
         }
       );
       const data = await res.json();
-      if (user.cartItems.length > 0) {
+      if (user?.cartItems.length > 0) {
         user.cartItems.map((item) => {
           if (item.bookId === data.message._id) {
             setBook(() => {
@@ -79,6 +82,56 @@ const ProductPage = () => {
         <div className={styles.image}>
           <div className={styles.imageWrapper}>
             {book.image && <Image src={book.image} layout="fill"></Image>}
+          </div>
+        </div>
+      </div>
+      <div className={styles.postHeroWrapper}>
+        <div className={styles.postHero}>
+          <Excerpt />
+          <div>
+            <h2>Reviews</h2>
+            <WriteReview />
+
+            <Reviews
+              reviews={[
+                {
+                  author: "Bishal Niroula",
+                  author_details: { rating: 5 },
+                  content:
+                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
+                },
+                {
+                  author: "Bishal Niroula",
+                  author_details: { rating: 5 },
+                  content:
+                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
+                },
+                {
+                  author: "Bishal Niroula",
+                  author_details: { rating: 5 },
+                  content:
+                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
+                },
+                {
+                  author: "Bishal Niroula",
+                  author_details: { rating: 5 },
+                  content:
+                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
+                },
+                {
+                  author: "Bishal Niroula",
+                  author_details: { rating: 5 },
+                  content:
+                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
+                },
+                {
+                  author: "Bishal Niroula",
+                  author_details: { rating: 5 },
+                  content:
+                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
+                },
+              ]}
+            />
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@
   position: sticky;
   top: -0.01rem;
   transition: 0.2s padding;
+  z-index: 99;
 }
 .nav.isPinned {
   padding: 0.7rem 5%;

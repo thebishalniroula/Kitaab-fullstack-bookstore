@@ -1,0 +1,35 @@
+.excerpt {
+  max-width: 30rem;
+  min-width: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #f4e8de;
+  padding: 1rem;
+  align-self: flex-start;
+  border-radius: 10px;
+  position: sticky;
+  top: 8rem;
+}
+.h4 {
+  color: #d77f04;
+  font-weight: normal;
+  font-size: 1rem;
+}
+.p,
+.span {
+  color: #928e8e;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.na {
+  color: rgb(149, 157, 165);
+}
+@media (max-width: 850px) {
+  .excerpt {
+    position: static;
+    max-width: unset;
+    width: 100%;
+  }
+}

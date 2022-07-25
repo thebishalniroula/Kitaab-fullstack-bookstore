@@ -1,0 +1,129 @@
+.container {
+  background-color: #f4e8de;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.inputDiv {
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  height: 5rem;
+  background-color: #f5f7f9;
+  color: #656462;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.inputDiv:hover {
+  background-color: #e2e5e5;
+}
+.reviewFormWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.58);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reviewForm {
+  padding: 0 1rem;
+  border-radius: 10px;
+  background-color: #f4e8de;
+  width: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.reviewForm textarea {
+  margin-top: 1rem;
+  border: none;
+  resize: none;
+  border-radius: 0 0 10px 10px;
+  /* padding: 1rem; */
+  background-color: #f4e8de;
+  height: 60%;
+  min-height: 07rem;
+  width: 100%;
+  font-size: 1.15rem;
+  color: #474644;
+  font-family: "poppins";
+}
+.reviewForm textarea:focus {
+  outline: none;
+  font-family: "poppins";
+}
+.reviewForm textarea::placeholder {
+  font-family: "poppins";
+}
+.reviewForm .title {
+  margin-top: 1rem;
+  font-weight: 600;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  display: block;
+  position: relative;
+  color: #474644;
+}
+.reviewForm p::after {
+  content: "";
+  height: 1px;
+  width: 100%;
+  background-color: #47464446;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+}
+.primary {
+  padding: 0.6rem 0;
+  border: none;
+  margin: 1rem 0;
+  border-radius: 10px;
+  background-color: #d57f07;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+.userDetails {
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.username {
+  font-weight: 600;
+}
+.privacy {
+  color: #656565;
+  font-size: 0.9rem;
+}
+.privacy::before {
+  content: "🌐 ";
+}
+
+.avatar {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  height: 3rem;
+  width: 3rem;
+}
+.starRating {
+  display: flex;
+  align-items: center;
+
+  gap: 0.3rem;
+}
+.rating {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #474644;
+}

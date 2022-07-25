@@ -99,6 +99,7 @@ const cart = () => {
           <h3>
             Total:{" "}
             <span>
+              Rs{" "}
               {cart.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.price * currentValue.quantity;
               }, 0)}

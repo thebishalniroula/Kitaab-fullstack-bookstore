@@ -1,0 +1,68 @@
+.review h4 {
+  color: #545353;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.review p,
+.review span {
+  color: #7b7878;
+  font-size: 1rem;
+}
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  position: relative;
+  padding: 1rem;
+}
+.review::after {
+  content: "";
+  position: relative;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.189);
+  display: block;
+  margin-top: 0.5rem;
+}
+.review:last-child:after {
+  display: none;
+}
+.reviewContent {
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.review:nth-child(1) {
+  margin-top: 0rem;
+}
+.authorDetails {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.showMore {
+  font-weight: 600;
+  text-align: right;
+  display: block;
+  cursor: pointer;
+}
+.showMore:hover {
+  text-decoration: underline;
+}
+.na {
+  color: rgb(149, 157, 165) !important;
+}
+.starRating {
+  pointer-events: none;
+}

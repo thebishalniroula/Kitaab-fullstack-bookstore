@@ -63,3 +63,24 @@
 .addedToCart {
   background-color: #6d6d6d;
 }
+.postHero {
+  display: flex;
+  gap: 2rem;
+}
+.postHeroWrapper {
+  margin: 3rem 5%;
+  position: relative;
+}
+.postHeroWrapper h2 {
+  color: #545353;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 850px) {
+  .postHero {
+    flex-wrap: wrap;
+  }
+  .postHeroWrapper h2 {
+    position: static;
+  }
+}

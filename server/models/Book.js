@@ -37,6 +37,11 @@ const bookSchema = new mongoose.Schema({
           ref: "User",
           required: true,
         },
+        stars: {
+          type: Number,
+          max: 5,
+          min: 1,
+        },
         review: {
           type: String,
           required: true,
