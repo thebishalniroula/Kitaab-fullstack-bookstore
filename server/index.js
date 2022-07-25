@@ -49,10 +49,6 @@ app.use("/api/auth/user/logout", require("./routes/auth/user/logout"));
 app.use("/api/auth/admin/login", require("./routes/auth/admin/login"));
 app.use("/api/auth/admin/logout", require("./routes/auth/admin/logout"));
 
-//handling dashboard route
-app.use("/api/dashboard/user", require("./routes/dashboard/user"));
-app.use("/api/dashboard/admin", require("./routes/dashboard/admin"));
-
 //handling books api
 app.use("/api/books/", require("./routes/api/books"));
 
