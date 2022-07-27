@@ -10,6 +10,15 @@ const WriteReview = () => {
   return (
     <>
       <div className={styles.container}>
+        <p
+          style={{
+            marginBottom: "1rem",
+            fontSize: "1.1rem",
+            fontWeight: "500",
+          }}
+        >
+          Write a review
+        </p>
         <div
           className={styles.inputDiv}
           onClick={() => {

@@ -1,7 +1,9 @@
 .container {
-  background-color: #f4e8de;
+  /* background-color: #f4e8de; */
   padding: 1rem;
   border-radius: 10px;
+  margin-bottom: 1rem;
+  border: 2px solid #f4e8de;
   margin-bottom: 1rem;
 }
 .inputDiv {
@@ -10,13 +12,15 @@
   padding: 1rem;
   height: 5rem;
   background-color: #f5f7f9;
-  color: #656462;
+  background-color: #f4e8de4a;
+  color: rgba(108, 106, 106, 0.758);
+  /* color: #656462; */
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 .inputDiv:hover {
-  background-color: #e2e5e5;
+  /* background-color: #e2e5e5; */
 }
 .reviewFormWrapper {
   position: fixed;

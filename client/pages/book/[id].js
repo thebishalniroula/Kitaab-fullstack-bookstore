@@ -89,7 +89,7 @@ const ProductPage = () => {
         <div className={styles.postHero}>
           <Excerpt />
           <div>
-            <h2>Reviews</h2>
+            <h2>Reviews(10)</h2>
             <WriteReview />
 
             <Reviews

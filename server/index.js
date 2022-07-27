@@ -51,6 +51,8 @@ app.use("/api/auth/admin/logout", require("./routes/auth/admin/logout"));
 
 //handling books api
 app.use("/api/books/", require("./routes/api/books"));
+//handling reviews api
+app.use("/api/reviews/", require("./routes/api/reviews"));
 
 //adding, removing, editing books
 app.use("/api/books/admin", require("./routes/api/editBooks"));
