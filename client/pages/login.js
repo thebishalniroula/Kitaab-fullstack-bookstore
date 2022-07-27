@@ -57,7 +57,7 @@ const login = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.logo}>Bookly</div>
+        <div className={styles.logo}>Kitaab</div>
         <p>
           Your go to online shop to buy all your favourite books at one place.
         </p>

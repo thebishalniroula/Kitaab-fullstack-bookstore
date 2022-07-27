@@ -115,15 +115,15 @@
   font-weight: 600;
 }
 .logo {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: rgb(103, 101, 101);
-  font-weight: bold;
+  font-weight: 700;
   letter-spacing: 1px;
 }
 .logo::first-letter {
-  font-size: 1.75rem;
+  font-size: 2rem;
   color: #f78f02;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 /* Nav links----------- */

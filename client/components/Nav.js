@@ -32,13 +32,13 @@ const Nav = () => {
     observer.observe(navRef.current);
   }
   if (showUserDetails) {
-    window.onmousedown = (e) => setShowUserDetails(() => false);
+    window.onmousedown = () => setShowUserDetails(() => false);
   }
   return (
     <>
       <nav className={styles.nav} ref={navRef}>
         <Link href={"/"}>
-          <div className={styles.logo}>Bookly</div>
+          <div className={styles.logo}>Kitaab</div>
         </Link>
         <div className={styles.searchWrapper}>
           <div className={styles.search}>

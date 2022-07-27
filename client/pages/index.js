@@ -14,14 +14,6 @@ export default function Home({ popular }) {
     );
 }
 export async function getServerSideProps() {
-  // const resPopularBooks = await fetch(
-  //   `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/popularnow`,
-  //   {
-  //     credentials: "include",
-  //   }
-  // );
-  // const dataPB = await resPopularBooks.json();
-  // console.log(dataPB);
   return {
     props: {
       popular: [],
