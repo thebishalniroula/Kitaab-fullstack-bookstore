@@ -12,10 +12,9 @@ const ProductPage = () => {
   const router = useRouter();
   const [book, setBook] = useState({});
   const { id } = router.query;
-
+  const [yourReviews, setYourReviews] = useState([]);
+  const [otherReviews, setOtherReviews] = useState([]);
   useEffect(() => {
-    console.log("user", user);
-    console.log(router.isReady);
     if (!router.isReady) return;
     (async () => {
       const res = await fetch(
@@ -44,11 +43,28 @@ const ProductPage = () => {
         });
       }
     })();
-  }, [router.isReady, user]);
+
+    ///
+    if (book.reviews) {
+      const filteredReviews = book.reviews.filter((review) => {
+        if (review.userId._id === user._id) {
+          return true;
+        }
+      });
+      setYourReviews(() => filteredReviews);
+      const otherReviews = book.reviews.filter((review) => {
+        if (review.userId._id !== user._id) {
+          return true;
+        }
+      });
+      setOtherReviews(otherReviews);
+    }
+  }, [router.isReady, user, book]);
 
   return (
     <>
       <div className={styles.container}>
+        {/* <pre>{JSON.stringify(book.reviews)}</pre> */}
         <div className={styles.bookDetails}>
           <h2 className={styles.title}>{book.title}</h2>
           <p className={styles.authors}>
@@ -87,50 +103,18 @@ const ProductPage = () => {
       </div>
       <div className={styles.postHeroWrapper}>
         <div className={styles.postHero}>
-          <Excerpt />
-          <div>
-            <h2>Reviews(10)</h2>
-            <WriteReview />
+          <div className={styles.excerpt}>
+            <Excerpt />
+          </div>
+          <div className={styles.reviewsContainer}>
+            <h2>Reviews</h2>
+            <WriteReview id={book._id} />
 
             <Reviews
-              reviews={[
-                {
-                  author: "Bishal Niroula",
-                  author_details: { rating: 5 },
-                  content:
-                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
-                },
-                {
-                  author: "Bishal Niroula",
-                  author_details: { rating: 5 },
-                  content:
-                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
-                },
-                {
-                  author: "Bishal Niroula",
-                  author_details: { rating: 5 },
-                  content:
-                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
-                },
-                {
-                  author: "Bishal Niroula",
-                  author_details: { rating: 5 },
-                  content:
-                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
-                },
-                {
-                  author: "Bishal Niroula",
-                  author_details: { rating: 5 },
-                  content:
-                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
-                },
-                {
-                  author: "Bishal Niroula",
-                  author_details: { rating: 5 },
-                  content:
-                    "Lorem ipsum dollar sit. Herro bro how are you. I am fine very good what about you. Its is a very good book bro. You need to read it atleast once hehehe. Higly recommended",
-                },
-              ]}
+              reviews={{
+                otherReviews: otherReviews.length > 0 ? otherReviews : [],
+                yourReviews: yourReviews.length > 0 ? yourReviews : [],
+              }}
             />
           </div>
         </div>

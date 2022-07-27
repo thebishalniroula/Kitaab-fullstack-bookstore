@@ -5,6 +5,7 @@ body {
   margin: 0;
   font-family: "poppins";
   background-color: rgb(255, 255, 255);
+  scroll-behavior: smooth;
 }
 
 a {

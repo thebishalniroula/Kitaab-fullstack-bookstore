@@ -3,12 +3,13 @@
   padding: 2rem 5%;
   justify-content: space-between;
   position: sticky;
-  top: -0.01rem;
+  top: -0.5rem;
   transition: 0.2s padding;
   z-index: 99;
+  background-color: white;
 }
 .nav.isPinned {
-  padding: 0.7rem 5%;
+  padding: 1.2rem 5% 0.7rem 5%;
   background-color: white;
 }
 .logo {

@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
       }
     })();
   }, []);
-
+  console.log(user);
   if (!user) {
     return (
       <UserContext.Provider value={{ user, setUser }}>

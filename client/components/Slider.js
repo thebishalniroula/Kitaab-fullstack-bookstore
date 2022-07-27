@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { addToCart } from "../utils";
+import { useHorizontalScroll } from "../utils";
 const Slider = ({ popularBooks }) => {
+  const containerRef = useHorizontalScroll();
   const { user, setUser } = useContext(UserContext);
   const [books, setBooks] = useState([]);
   useEffect(() => {
@@ -33,7 +35,7 @@ const Slider = ({ popularBooks }) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Popular now</h3>
-      <div className={styles.books}>
+      <div className={styles.books} ref={containerRef}>
         {books.map((book) => {
           return (
             <div className={styles.book} key={book._id}>

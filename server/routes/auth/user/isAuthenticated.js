@@ -3,11 +3,11 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   if (req.user) {
-    const { cartItems, email, isUser, name } = req.user;
+    const { cartItems, email, isUser, name, _id } = req.user;
     return res.json({
       status: "success",
       message: "You are logged in.",
-      user: { cartItems, email, isUser, name },
+      user: { cartItems, email, isUser, name, _id },
     });
   } else
     return res.status(400).json({

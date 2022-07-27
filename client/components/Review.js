@@ -21,27 +21,26 @@ const Review = ({ item }) => {
           <div className={styles.authorDetails}>
             <Image
               src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png`}
-              height={60}
-              width={60}
+              height={50}
+              width={50}
               className={styles.avatar}
               alt="profile photo"
             />
             <div>
-              <h4>{item.author}</h4>
-              {item.author_details.rating && (
-                <Rating
-                  initialValue={item.author_details.rating}
-                  iconsCount={10}
-                  readOnly={true}
-                  fillColor="#ffcd17"
-                  emptyColor="#a8a8a5"
-                  allowHover={false}
-                  size={20}
-                  className={styles.starRating}
-                />
-              )}
-              {item.author_details.rating ? (
-                <span>{`(${item.author_details.rating} stars)`}</span>
+              <h4>{item.userId.name}</h4>
+              <Rating
+                initialValue={item.stars}
+                iconsCount={5}
+                readOnly={true}
+                fillColor="#ffcd17"
+                emptyColor="#a8a8a5"
+                allowHover={false}
+                size={20}
+                className={styles.starRating}
+              />
+
+              {item.stars ? (
+                <span>{`(${item.stars} stars)`}</span>
               ) : (
                 <span className={styles.na}>{`Rating not availabe.`}</span>
               )}
@@ -53,7 +52,7 @@ const Review = ({ item }) => {
               showShowMore ? styles.truncate : ""
             }`}
           >
-            {item.content}
+            {item.review}
           </p>
           {showShowMore && (
             <span

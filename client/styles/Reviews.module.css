@@ -1,6 +1,21 @@
 .na {
   color: rgb(149, 157, 165);
+  padding: 1rem;
 }
-.container {
-  max-width: 50rem;
+.reviewWrapper {
+  background-color: #f4e8de;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.reviewTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3b3a38;
+  padding: 1rem 1rem 0 1rem;
+}
+
+@media (max-width: 850px) {
+  .container {
+    /* max-width: 30rem; */
+  }
 }
