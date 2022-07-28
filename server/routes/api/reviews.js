@@ -15,18 +15,29 @@ router.post("/add", async (req, res) => {
   const { id, stars, review } = req.body;
   try {
     const bookDB = await Book.findById(id);
-    const newReview = {
-      userId: req.user._id,
-      stars,
-      review,
-    };
-    bookDB.reviews.unshift(newReview);
-    try {
-      await bookDB.save();
-      res.json({ status: "success", message: newReview });
-    } catch (error) {
-      res.json({ status: "error", message: error.message });
-    }
+    const userReviews = bookDB.reviews.filter((review) => {
+      if (review.userId === req.user._id) {
+        return true;
+      }
+    });
+    if (userReviews.length === 0) {
+      const newReview = {
+        userId: req.user._id,
+        stars,
+        review,
+      };
+      bookDB.reviews.unshift(newReview);
+      try {
+        await bookDB.save();
+        res.json({ status: "success", message: newReview });
+      } catch (error) {
+        res.json({ status: "error", message: error.message });
+      }
+    } else
+      return res.json({
+        status: "error",
+        message: "User has already posted a review",
+      });
   } catch (error) {
     res.json({ status: "error", message: error.message });
   }
