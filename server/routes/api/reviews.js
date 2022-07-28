@@ -42,5 +42,40 @@ router.post("/add", async (req, res) => {
     res.json({ status: "error", message: error.message });
   }
 });
+router.patch("/edit", async (req, res) => {
+  const { id, stars, review } = req.body;
+  try {
+    const bookDB = await Book.findById(id);
+    const userReviews = bookDB.reviews.filter((review) => {
+      if (review.userId === req.user._id) {
+        return true;
+      }
+    });
+    if (userReviews.length > 0) {
+      const newReview = {
+        userId: req.user._id,
+        stars: stars || userReviews[0].stars,
+        review: review || userReviews[0].review,
+      };
+      bookDB.reviews.map((review) => {
+        if (review.userId === req.user._id) {
+          review = newReview;
+        }
+      });
+      try {
+        await bookDB.save();
+        res.json({ status: "success", message: newReview });
+      } catch (error) {
+        res.json({ status: "error", message: error.message });
+      }
+    } else
+      return res.json({
+        status: "error",
+        message: "Please post a review before editing.",
+      });
+  } catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+});
 
 module.exports = router;
