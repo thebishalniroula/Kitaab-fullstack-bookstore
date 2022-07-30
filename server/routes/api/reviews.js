@@ -16,7 +16,7 @@ router.post("/add", async (req, res) => {
   try {
     const bookDB = await Book.findById(id);
     const userReviews = bookDB.reviews.filter((review) => {
-      if (review.userId === req.user._id) {
+      if (review.userId.toString() === req.user._id.toString()) {
         return true;
       }
     });
@@ -29,7 +29,17 @@ router.post("/add", async (req, res) => {
       bookDB.reviews.unshift(newReview);
       try {
         await bookDB.save();
-        res.json({ status: "success", message: newReview });
+        res.json({
+          status: "success",
+          message: {
+            ...newReview,
+            userId: {
+              _id: req.user._id,
+              name: req.user.name,
+              email: req.user.email,
+            },
+          },
+        });
       } catch (error) {
         res.json({ status: "error", message: error.message });
       }
@@ -42,12 +52,16 @@ router.post("/add", async (req, res) => {
     res.json({ status: "error", message: error.message });
   }
 });
+
 router.patch("/edit", async (req, res) => {
   const { id, stars, review } = req.body;
   try {
-    const bookDB = await Book.findById(id);
+    const bookDB = await Book.findById(id).populate(
+      "reviews.userId",
+      "name email"
+    );
     const userReviews = bookDB.reviews.filter((review) => {
-      if (review.userId === req.user._id) {
+      if (review.userId._id.toString() === req.user._id.toString()) {
         return true;
       }
     });
@@ -57,14 +71,24 @@ router.patch("/edit", async (req, res) => {
         stars: stars || userReviews[0].stars,
         review: review || userReviews[0].review,
       };
-      bookDB.reviews.map((review) => {
-        if (review.userId === req.user._id) {
-          review = newReview;
+      bookDB.reviews.map((review, index) => {
+        if (review.userId.toString() === req.user._id.toString()) {
+          bookDB.reviews[index] = newReview;
         }
       });
       try {
         await bookDB.save();
-        res.json({ status: "success", message: newReview });
+        res.json({
+          status: "success",
+          message: {
+            ...newReview,
+            userId: {
+              _id: req.user._id,
+              name: req.user.name,
+              email: req.user.email,
+            },
+          },
+        });
       } catch (error) {
         res.json({ status: "error", message: error.message });
       }
@@ -78,4 +102,37 @@ router.patch("/edit", async (req, res) => {
   }
 });
 
+router.delete("/delete", async (req, res) => {
+  const { id } = req.body;
+  try {
+    let bookDB = await Book.findById(id);
+    const userReviews = bookDB.reviews.filter((review) => {
+      if (review.userId.toString() === req.user._id.toString()) {
+        return true;
+      }
+    });
+    if (userReviews.length > 0) {
+      const reviewsAfterDeleting = bookDB.reviews.filter((review) => {
+        if (review.userId.toString() === req.user._id.toString()) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      bookDB.reviews = reviewsAfterDeleting;
+      try {
+        await bookDB.save();
+        res.json({ status: "success", message: "Deleted successfully" });
+      } catch (error) {
+        res.json({ status: "error", message: error.message });
+      }
+    } else
+      return res.json({
+        status: "error",
+        message: "Review not found in database.",
+      });
+  } catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+});
 module.exports = router;

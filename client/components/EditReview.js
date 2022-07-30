@@ -3,23 +3,24 @@ import { useContext, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
-const WriteReview = ({ id, setYourReviews }) => {
+const WriteReview = ({
+  bookId: id,
+  showReviewForm,
+  setShowReviewForm,
+  prevRating,
+  prevReview,
+  setYourReviews,
+}) => {
   const { user } = useContext(UserContext);
-  const [showReviewForm, setShowReviewForm] = useState(false);
   const [rating, setRating] = useState(0);
   const [error, setError] = useState("");
   const reviewRef = useRef(null);
+
   const addReview = async () => {
-    if (!reviewRef.current.value) {
-      return setError("Please write a review before posting.");
-    }
-    if (!rating) {
-      return setError("Please give a star rating before posting.");
-    }
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/add`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/edit`,
       {
-        method: "POST",
+        method: "PATCH",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -32,36 +33,27 @@ const WriteReview = ({ id, setYourReviews }) => {
       }
     );
     const data = await res.json();
-
     if (data.status === "success") {
-      setYourReviews(() => [data.message]);
+      console.log("data message", data.message);
+      setYourReviews(() => [
+        {
+          ...data.message,
+        },
+      ]);
       setShowReviewForm(() => false);
     } else {
-      setError(id);
+      setError(data.message);
     }
   };
 
   if (user)
     return (
       <>
-        <div className={styles.container}>
-          <p className={styles.cardTitle}>Write a review</p>
-          <div
-            className={styles.inputDiv}
-            onClick={() => {
-              setShowReviewForm(true);
-            }}
-          >
-            Reading this book? Review and rate it here,{" "}
-            {user.name.split(" ")[0]} ...
-          </div>
-        </div>
         {showReviewForm && (
           <div
             className={styles.reviewFormWrapper}
-            onClick={(e) => {
-              console.log(e.target.toString());
-              setShowReviewForm(false);
+            onClick={() => {
+              setShowReviewForm(() => false);
             }}
           >
             <div
@@ -69,7 +61,7 @@ const WriteReview = ({ id, setYourReviews }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <p className={styles.title} onClick={(e) => e.stopPropagation()}>
-                Write review
+                Edit review
               </p>
               <div className={styles.userDetails}>
                 <div className={styles.avatar}>
@@ -93,7 +85,7 @@ const WriteReview = ({ id, setYourReviews }) => {
                 <Rating
                   ratingValue={rating}
                   onClick={setRating}
-                  initialValue={0}
+                  initialValue={prevRating}
                   iconsCount={5}
                   fillColor="#d57f07"
                   emptyColor="#a8a8a5"
@@ -116,7 +108,10 @@ const WriteReview = ({ id, setYourReviews }) => {
                 onChange={() => {
                   setError("");
                 }}
-              />
+              >
+                {prevReview}
+              </textarea>
+
               <button
                 className={styles.primary}
                 onClick={(e) => {
@@ -124,7 +119,7 @@ const WriteReview = ({ id, setYourReviews }) => {
                   addReview();
                 }}
               >
-                Post
+                Edit
               </button>
             </div>
           </div>

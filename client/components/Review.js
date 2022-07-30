@@ -2,9 +2,10 @@ import styles from "../styles/Review.module.css";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Rating } from "react-simple-star-rating";
-
-const Review = ({ item }) => {
+import EditReview from "./EditReview";
+const Review = ({ bookId, item, isUserReview = false, setYourReviews }) => {
   const [showShowMore, setShowShowMore] = useState(true);
+  const [showReviewForm, setShowReviewForm] = useState(false);
   const reviewRef = useRef(null);
   useEffect(() => {
     if (reviewRef.current) {
@@ -14,6 +15,25 @@ const Review = ({ item }) => {
       }
     }
   }, []);
+  const deleteReview = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/delete`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: bookId,
+        }),
+      }
+    );
+    const data = await res.json();
+    if (data.status === "success") {
+      setYourReviews(() => []);
+    }
+  };
   return (
     <>
       <div className={styles.review}>
@@ -54,6 +74,22 @@ const Review = ({ item }) => {
           >
             {item.review}
           </p>
+          {isUserReview && (
+            <div className={styles.deleteEditContainer}>
+              <p className={styles.delete} onClick={deleteReview}>
+                Delete
+              </p>
+              <p
+                className={styles.edit}
+                onClick={() => {
+                  setShowReviewForm(() => true);
+                }}
+              >
+                Edit
+              </p>
+            </div>
+          )}
+
           {showShowMore && (
             <span
               className={styles.showMore}
@@ -65,6 +101,16 @@ const Review = ({ item }) => {
             </span>
           )}
         </div>
+        {isUserReview && (
+          <EditReview
+            bookId={bookId}
+            showReviewForm={showReviewForm}
+            setShowReviewForm={setShowReviewForm}
+            prevRating={item.stars}
+            prevReview={item.review}
+            setYourReviews={setYourReviews}
+          />
+        )}
       </div>
     </>
   );

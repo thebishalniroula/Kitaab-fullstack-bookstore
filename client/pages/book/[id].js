@@ -45,7 +45,11 @@ const ProductPage = () => {
     })();
 
     ///
+  }, [router.isReady, user]);
+
+  useEffect(() => {
     if (book.reviews) {
+      console.log("reviews", book.reviews);
       const filteredReviews = book.reviews.filter((review) => {
         if (review.userId._id === user._id) {
           return true;
@@ -59,68 +63,72 @@ const ProductPage = () => {
       });
       setOtherReviews(otherReviews);
     }
-  }, [router.isReady, user, book]);
+  }, [book]);
 
-  return (
-    <>
-      <div className={styles.container}>
-        {/* <pre>{JSON.stringify(book.reviews)}</pre> */}
-        <div className={styles.bookDetails}>
-          <h2 className={styles.title}>{book.title}</h2>
-          <p className={styles.authors}>
-            By <span>{book?.authors?.join(", ")}</span>
-          </p>
-          <p className={styles.description}>{book.description}</p>
-          <div className={styles.buttons}>
-            {book.isInCart ? (
-              <button className={`${styles.primary} ${styles.addedToCart}`}>
-                Added to cart
-              </button>
-            ) : (
-              <button
-                className={styles.primary}
-                onClick={() => {
-                  addToCart(
-                    book._id,
-                    book.title,
-                    book.image,
-                    book.price,
-                    setUser
-                  );
+  if (book)
+    return (
+      <>
+        <div className={styles.container}>
+          {/* <pre>{JSON.stringify(book.reviews)}</pre> */}
+          <div className={styles.bookDetails}>
+            <h2 className={styles.title}>{book.title}</h2>
+            <p className={styles.authors}>
+              By <span>{book?.authors?.join(", ")}</span>
+            </p>
+            <p className={styles.description}>{book.description}</p>
+            <div className={styles.buttons}>
+              {book.isInCart ? (
+                <button className={`${styles.primary} ${styles.addedToCart}`}>
+                  Added to cart
+                </button>
+              ) : (
+                <button
+                  className={styles.primary}
+                  onClick={() => {
+                    addToCart(
+                      book._id,
+                      book.title,
+                      book.image,
+                      book.price,
+                      setUser
+                    );
+                  }}
+                >
+                  Add to cart
+                </button>
+              )}
+              <button className={styles.secondary}>Reviews</button>
+            </div>
+          </div>
+          <div className={styles.image}>
+            <div className={styles.imageWrapper}>
+              {book.image && <Image src={book.image} layout="fill"></Image>}
+            </div>
+          </div>
+        </div>
+        <div className={styles.postHeroWrapper}>
+          <div className={styles.postHero}>
+            <div className={styles.excerpt}>
+              <Excerpt />
+            </div>
+            <div className={styles.reviewsContainer}>
+              <h2>Reviews</h2>
+              {yourReviews.length === 0 && (
+                <WriteReview id={book._id} setYourReviews={setYourReviews} />
+              )}
+              <Reviews
+                bookId={book._id}
+                reviews={{
+                  otherReviews: otherReviews.length > 0 ? otherReviews : [],
+                  yourReviews: yourReviews.length > 0 ? yourReviews : [],
                 }}
-              >
-                Add to cart
-              </button>
-            )}
-            <button className={styles.secondary}>Reviews</button>
+                setYourReviews={setYourReviews}
+              />
+            </div>
           </div>
         </div>
-        <div className={styles.image}>
-          <div className={styles.imageWrapper}>
-            {book.image && <Image src={book.image} layout="fill"></Image>}
-          </div>
-        </div>
-      </div>
-      <div className={styles.postHeroWrapper}>
-        <div className={styles.postHero}>
-          <div className={styles.excerpt}>
-            <Excerpt />
-          </div>
-          <div className={styles.reviewsContainer}>
-            <h2>Reviews</h2>
-            <WriteReview id={book._id} />
-
-            <Reviews
-              reviews={{
-                otherReviews: otherReviews.length > 0 ? otherReviews : [],
-                yourReviews: yourReviews.length > 0 ? yourReviews : [],
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
 };
 
 export default ProductPage;

@@ -65,3 +65,21 @@
 .starRating {
   pointer-events: none;
 }
+.deleteEditContainer {
+  display: flex;
+  gap: 0.8rem;
+}
+.delete,
+.edit {
+  cursor: pointer;
+}
+.delete:hover,
+.edit:hover {
+  text-decoration: underline;
+}
+.deleteEditContainer .delete {
+  color: rgba(180, 29, 29, 0.699);
+}
+.deleteEditContainer .edit {
+  color: #7b7878c7;
+}
