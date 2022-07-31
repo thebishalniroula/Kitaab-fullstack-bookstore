@@ -40,4 +40,13 @@ router.get("/category/:category", async (req, res) => {
   return res.status(200).json({ status: "success", message: books });
 });
 
+// router.get("/search/:query", async (req, res) => {
+//   const query = req.params.query;
+//   try {
+//     const books = await Book.find();
+//     return res.status(200).json({ status: "success", message: books });
+//   } catch (error) {
+//     return res.status(200).json({ status: "error", message: error });
+//   }
+// });
 module.exports = router;
