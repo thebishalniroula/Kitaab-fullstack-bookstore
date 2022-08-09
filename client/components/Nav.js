@@ -95,10 +95,10 @@ const Nav = () => {
         <a href="#" className={styles.active}>
           Home
         </a>
-        <a href="#">Comics</a>
-        <a href="#">Finance</a>
-        <a href="#">Self help</a>
-        <a href="#">Novels</a>
+        <Link href="/category/comics">Comics</Link>
+        <Link href="/category/finance">Finance</Link>
+        <a href="/category/selfhelp">Self help</a>
+        <a href="/category/novels">Novels</a>
       </div>
     </>
   );

@@ -1,0 +1,37 @@
+.book {
+  cursor: pointer;
+}
+.bookTitle {
+  font-size: 1rem;
+  line-height: 1.3rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.author {
+  color: #b9babd;
+  font-size: 0.8rem;
+}
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  background-color: #b9babd;
+  height: 15rem;
+  width: 10rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.addToCart {
+  color: #e98c0b;
+  cursor: pointer;
+}
+.addToCart:hover {
+  text-decoration: underline;
+}
+.addedToCart {
+  cursor: pointer;
+  color: #5e5c5c;
+}

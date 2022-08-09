@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { addToCart } from "../utils";
 import { useHorizontalScroll } from "../utils";
+import BookCard from "./BookCard";
 const Slider = ({ popularBooks }) => {
   const containerRef = useHorizontalScroll();
   const { user, setUser } = useContext(UserContext);
@@ -36,46 +37,7 @@ const Slider = ({ popularBooks }) => {
     <div className={styles.container}>
       <h3 className={styles.title}>Popular now</h3>
       <div className={styles.books} ref={containerRef}>
-        {books.map((book) => {
-          return (
-            <div className={styles.book} key={book._id}>
-              <Link href={`/book/${book._id}`}>
-                <div>
-                  <div className={styles.imageWrapper}>
-                    <Image
-                      src={book.image}
-                      height={200}
-                      width={133}
-                      layout="fill"
-                    />
-                  </div>
-                  <p className={styles.bookTitle}>{book.title}</p>
-                  {book?.authors && (
-                    <p className={styles.author}>{book.authors[0]}</p>
-                  )}
-                </div>
-              </Link>
-              {book.isInCart ? (
-                <p className={styles.addedToCart}>Added to cart</p>
-              ) : (
-                <p
-                  className={styles.addToCart}
-                  onClick={() =>
-                    addToCart(
-                      book._id,
-                      book.title,
-                      book.image,
-                      book.price,
-                      setUser
-                    )
-                  }
-                >
-                  Add to cart
-                </p>
-              )}
-            </div>
-          );
-        })}
+        <BookCard books={books} />
       </div>
     </div>
   );

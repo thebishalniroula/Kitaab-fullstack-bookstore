@@ -1,0 +1,19 @@
+.container {
+  margin: 0rem 5% 2rem 5%;
+  display: flex;
+  grid-template-columns: repeat(4, minmax(9.375rem, auto));
+  gap: 2rem;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.container p {
+  max-width: 10rem;
+}
+
+.title {
+  text-transform: capitalize;
+  margin: 2rem 5% 1rem 5%;
+  color: #5e5c5c;
+  font-size: 1.25rem;
+}

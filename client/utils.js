@@ -24,6 +24,7 @@ export const addToCart = async (id, title, image, price, setUser) => {
     console.log(error);
   }
 };
+
 export function useHorizontalScroll() {
   const elRef = useRef();
   useEffect(() => {

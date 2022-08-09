@@ -35,7 +35,7 @@ router.get("/:bookId", async (req, res) => {
 
 //get book by category
 router.get("/category/:category", async (req, res) => {
-  const category = req.params.category;
+  const category = req.params.category.toUpperCase();
   const books = await Book.find({ category });
   return res.status(200).json({ status: "success", message: books });
 });

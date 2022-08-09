@@ -49,7 +49,6 @@ const ProductPage = () => {
 
   useEffect(() => {
     if (book.reviews) {
-      console.log("reviews", book.reviews);
       const filteredReviews = book.reviews.filter((review) => {
         if (review.userId._id === user._id) {
           return true;
