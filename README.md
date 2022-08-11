@@ -1,6 +1,7 @@
 # Project: full stack single seller ecoomerce
 This is a full stack single seller ecommerce website that is being built using express js as backend, nextjs as frontend and mongoDB as database.
 
+# Backend routes
 ## End-point: user register
 ### Method: POST
 >```
