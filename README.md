@@ -4,7 +4,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: user register
 ### Method: POST
 >```
->localhost:5000/api/auth/user/register
+>/api/auth/user/register
 >```
 ### Body (**raw**)
 
@@ -30,7 +30,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: user login
 ### Method: POST
 >```
->localhost:5000/api/auth/user/login
+>/api/auth/user/login
 >```
 ### Body (**raw**)
 
@@ -55,7 +55,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: user logout
 ### Method: POST
 >```
->localhost:5000/api/auth/admin/logout
+>/api/auth/admin/logout
 >```
 ### Response: 200
 ```json
@@ -71,7 +71,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: admin login
 ### Method: POST
 >```
->localhost:5000/api/auth/admin/login
+>/api/auth/admin/login
 >```
 ### Body (**raw**)
 
@@ -100,7 +100,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: verify-otp
 ### Method: POST
 >```
->localhost:5000/api/auth/admin/login/verify-otp
+>/api/auth/admin/login/verify-otp
 >```
 ### Body (**raw**)
 
@@ -126,7 +126,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: resend-otp
 ### Method: POST
 >```
->localhost:5000/api/auth/admin/login/resend-otp
+>/api/auth/admin/login/resend-otp
 >```
 ### Body (**raw**)
 
@@ -152,7 +152,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: admin logout
 ### Method: POST
 >```
->localhost:5000/api/auth/admin/logout
+>/api/auth/admin/logout
 >```
 ### Response: 200
 ```json
@@ -168,7 +168,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: add book
 ### Method: POST
 >```
->localhost:5000/api/books/admin/add
+>/api/books/admin/add
 >```
 ### Body (**raw**)
 
@@ -203,7 +203,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: update book
 ### Method: PATCH
 >```
->localhost:5000/api/books/admin/update/:id
+>/api/books/admin/update/:id
 >```
 ### Body (**raw**)
 
@@ -240,7 +240,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: books
 ### Method: GET
 >```
->localhost:5000/api/books/
+>/api/books/
 >```
 ### Response: 200
 ```json
@@ -299,7 +299,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: book by id
 ### Method: GET
 >```
->localhost:5000/api/books/:id
+>/api/books/:id
 >```
 ### Response: 200
 ```json
@@ -322,7 +322,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: books by category
 ### Method: GET
 >```
->localhost:5000/api/books/category/:category
+>/api/books/category/:category
 >```
 ### Response: 200
 ```json
@@ -404,7 +404,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: add to cart
 ### Method: POST
 >```
->localhost:5000/api/cart/add/:id
+>/api/cart/add/:id
 >```
 ### Response: 200
 ```json
@@ -420,7 +420,7 @@ This is a full stack single seller ecommerce website that is being built using e
 ## End-point: remove from cart
 ### Method: DELETE
 >```
->localhost:5000/api/cart/remove/:id
+>/api/cart/remove/:id
 >```
 ### Response: 200
 ```json
