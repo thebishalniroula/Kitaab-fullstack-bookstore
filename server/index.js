@@ -65,6 +65,10 @@ app.use("/api/payment", require("./routes/paymentRoutes/stripe"));
 
 //is logged in?
 app.use("/api/isLoggedIn", require("./routes/auth/user/isAuthenticated"));
+app.use(
+  "/api/admin/isLoggedIn",
+  require("./routes/auth/admin/isAuthenticated")
+);
 
 //Starting server
 app.listen(process.env.PORT || 3000, () => {

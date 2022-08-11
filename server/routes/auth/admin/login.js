@@ -7,7 +7,6 @@ const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
   const adminDB = await Admin.findOne({ email });
   if (adminDB) {
     const isValid = await bcrypt.compare(password, adminDB.password);
@@ -34,7 +33,8 @@ router.post("/", async (req, res) => {
 router.post(
   "/verify-otp",
   (req, res, next) => {
-    const { email, password, otp: otpReceived } = req.body;
+    const { otp: otpReceived } = req.body;
+
     const otpSent = req.session.otp;
     if (otpSent === otpReceived) {
       return next();
@@ -46,8 +46,11 @@ router.post(
   },
   passport.authenticate("admin"),
   (req, res) => {
+    const { email, isAdmin, name, _id } = req.user;
+
     res.status(200).json({
       status: "success",
+      user: { name, email, isAdmin, _id },
       message: `You have been logged in as admin.`,
     });
   }

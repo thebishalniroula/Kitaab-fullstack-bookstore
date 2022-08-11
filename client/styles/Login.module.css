@@ -109,3 +109,14 @@
   color: rgb(201, 52, 52);
   font-size: 1.15rem;
 }
+/* Chrome, Safari, Edge, Opera */
+.container input::-webkit-outer-spin-button,
+.container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.container input[type="number"] {
+  -moz-appearance: textfield;
+}

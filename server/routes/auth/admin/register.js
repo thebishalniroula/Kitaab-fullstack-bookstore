@@ -2,9 +2,10 @@ const Admin = require("../../../models/Admin");
 const bcrypt = require("bcrypt");
 const inquirer = require("inquirer");
 const mongoose = require("mongoose");
+
 require("dotenv").config({ path: "../../../.env" });
 
-mongoose.connect(process.env.DB_CONNECTION_STRING, (err) => {
+mongoose.connect("mongodb://127.0.0.1:27017/newappusers", (err) => {
   if (err) {
     return console.log(err);
   }
@@ -42,7 +43,7 @@ const createADmin = async (email, plainPassword) => {
     console.log(error);
   }
 };
-//Reading values from terminal
+// Reading values from terminal
 inquirer.prompt(questions).then(({ email, password }) => {
   createADmin(email, password);
 });
