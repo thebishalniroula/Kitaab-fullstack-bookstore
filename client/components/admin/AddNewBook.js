@@ -12,20 +12,19 @@ const AddNewBook = () => {
   // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formRef.current);
+    // console.log(formRef.current);
     const data = new FormData(formRef.current);
-    console.log(data);
-    // (async () => {
-    //   const res = await fetch("http://localhost:5000/api/books/admin/add", {
-    //     method: "POST",
-    //     credentials: "include",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: data,
-    //   });
-    //   // const data = await res.json();
-    // })();
+    console.log(...data);
+    (async () => {
+      const res = await fetch("http://localhost:5000/api/books/admin/add", {
+        method: "POST",
+        credentials: "include",
+        headers: {},
+        body: data,
+      });
+      const data = await res.json();
+      console.log(data);
+    })();
   };
   const handleOnChange = () => {};
   return (
@@ -59,7 +58,7 @@ const AddNewBook = () => {
         </div>
         <div>
           <label>Category</label>
-          <select>
+          <select name="category">
             <option value="uncategorised">Uncategorised</option>
             <option value="comics">Comics</option>
             <option value="novels">Novels</option>
@@ -69,11 +68,11 @@ const AddNewBook = () => {
         </div>
         <div>
           <label>Price(NRs)</label>
-          <input type="number" placeholder="1200" />
+          <input type="number" placeholder="1200" name="price" />
         </div>
         <div>
           <label>Stock</label>
-          <input type="number" placeholder="100" />
+          <input type="number" placeholder="100" name="stock" />
         </div>
         <div>
           <label>Image</label>
@@ -81,6 +80,7 @@ const AddNewBook = () => {
             type="file"
             accept="image/png, image/gif, image/jpeg"
             ref={imageRef}
+            name="image"
           />
         </div>
         <button className={styles.submit} onClick={handleSubmit}>

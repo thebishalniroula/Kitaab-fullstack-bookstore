@@ -64,6 +64,8 @@ var upload = multer({
 });
 router.post("/add", upload.single("image"), async (req, res) => {
   const errors = validationResult(req);
+  console.log(req.file);
+  console.log(req.body);
   if (!errors.isEmpty()) {
     return res.status(400).json(errors);
   }
@@ -71,6 +73,7 @@ router.post("/add", upload.single("image"), async (req, res) => {
     ...req.body,
     image: "/images/books" + req.file.filename,
   });
+  console.log(book);
   try {
     const bookDb = await book.save();
     res.status(200).json(bookDb);
