@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo");
 require("./strategies/local");
+const path = require("path");
 
 const app = express();
 if (process.env.NODE_ENV !== "PRODUCTION") {
@@ -32,7 +33,8 @@ app.use(
 app.use(cookieParser(process.env.SESSION_SECRET));
 //Enabling body parsing
 app.use(express.json());
-
+console.log(__dirname);
+app.use("/public", express.static(path.join(__dirname, "images/books")));
 //Passport setup
 app.use(passport.initialize());
 app.use(passport.session());

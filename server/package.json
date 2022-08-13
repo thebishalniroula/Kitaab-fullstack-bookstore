@@ -21,10 +21,12 @@
     "express-validator": "^6.14.2",
     "inquirer": "^8.0.0",
     "mongoose": "^6.4.2",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.7.6",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "stripe": "^9.14.0"
+    "stripe": "^9.14.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.18"

@@ -1,0 +1,87 @@
+.container {
+  margin-bottom: 1rem;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 0 5%;
+}
+.form label,
+.form input,
+.form textarea,
+.form select {
+  display: block;
+}
+.form label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.form input[type="text"],
+.form input[type="number"],
+.form textarea {
+  padding: 1rem;
+  display: block;
+  height: 3rem;
+  width: 60%;
+  font-size: 1rem;
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid rgb(190, 183, 183);
+  font-size: 1.15rem;
+  background: none;
+}
+.form textarea {
+  resize: none;
+  height: 10rem;
+}
+.form input::placeholder {
+  color: #b5bbbd;
+  font-size: 1.15rem;
+}
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  background-color: none;
+  outline: 2px solid #f78f02;
+  border: none;
+}
+
+.form label {
+  margin-bottom: 0.5rem;
+}
+.form select {
+  height: 3rem;
+  width: 60%;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: #606364;
+  padding-left: 1rem;
+}
+.form section option {
+  display: block;
+  padding: 1rem;
+}
+.form input[type="file"]::-webkit-file-upload-button {
+  border: 2px solid #f79102d4;
+  padding: 1rem 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 50%;
+}
+.form input[type="file"]:focus {
+  outline: none;
+  border: none;
+}
+.submit {
+  align-self: flex-start;
+  padding: 1rem;
+  border: none;
+  background-color: #f78f02;
+  border-radius: 10px;
+  width: 60%;
+  color: #252323;
+  font-weight: 500;
+  font-size: 1rem;
+}

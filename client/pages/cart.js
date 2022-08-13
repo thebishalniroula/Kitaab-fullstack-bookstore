@@ -56,67 +56,70 @@ const cart = () => {
     }
   };
 
-  return (
-    <>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Cart</h2>
-        {cart.length === 0 && (
-          <div className={styles.emptyCart}>
-            <p>{":("}</p>
-            <p>Your cart is empty</p>
+  if (user)
+    return (
+      <>
+        <div className={styles.container}>
+          <h2 className={styles.title}>Cart</h2>
+          {cart.length === 0 && (
+            <div className={styles.emptyCart}>
+              <p>{":("}</p>
+              <p>Your cart is empty</p>
+            </div>
+          )}
+          {cart.length > 0 &&
+            cart[0]?.image &&
+            cart.map((item) => {
+              return (
+                <div className={styles.item}>
+                  <div className={styles.itemDetails}>
+                    <p className={styles.itemTitle}>
+                      {`${item.title} `} <span>(X{item.quantity})</span>
+                    </p>
+                    <p className={styles.price}>
+                      Rs: {item.price}{" "}
+                      <span
+                        className={styles.remove}
+                        onClick={() => {
+                          removeFromCart(item.bookId);
+                        }}
+                      >
+                        Remove
+                      </span>
+                    </p>
+                  </div>
+                  <div className={styles.imageWrapper}>
+                    <Image src={item.image} layout="fill" />
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        {cart.length > 0 && (
+          <div className={styles.buttons}>
+            <h3>
+              Total:{" "}
+              <span>
+                Rs{" "}
+                {cart.reduce((accumulator, currentValue) => {
+                  return (
+                    accumulator + currentValue.price * currentValue.quantity
+                  );
+                }, 0)}
+              </span>
+            </h3>
+            <button
+              className={styles.primary}
+              onClick={() => {
+                checkout();
+              }}
+            >
+              Checkout
+            </button>
           </div>
         )}
-        {cart.length > 0 &&
-          cart[0]?.image &&
-          cart.map((item) => {
-            return (
-              <div className={styles.item}>
-                <div className={styles.itemDetails}>
-                  <p className={styles.itemTitle}>
-                    {`${item.title} `} <span>(X{item.quantity})</span>
-                  </p>
-                  <p className={styles.price}>
-                    Rs: {item.price}{" "}
-                    <span
-                      className={styles.remove}
-                      onClick={() => {
-                        removeFromCart(item.bookId);
-                      }}
-                    >
-                      Remove
-                    </span>
-                  </p>
-                </div>
-                <div className={styles.imageWrapper}>
-                  <Image src={item.image} layout="fill" />
-                </div>
-              </div>
-            );
-          })}
-      </div>
-      {cart.length > 0 && (
-        <div className={styles.buttons}>
-          <h3>
-            Total:{" "}
-            <span>
-              Rs{" "}
-              {cart.reduce((accumulator, currentValue) => {
-                return accumulator + currentValue.price * currentValue.quantity;
-              }, 0)}
-            </span>
-          </h3>
-          <button
-            className={styles.primary}
-            onClick={() => {
-              checkout();
-            }}
-          >
-            Checkout
-          </button>
-        </div>
-      )}
-    </>
-  );
+      </>
+    );
 };
 
 export default cart;

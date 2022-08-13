@@ -3,7 +3,10 @@ require("dotenv").config({
   path: "../.env",
 });
 module.exports.generateOtp = () => {
-  const OTP = parseInt(Math.random() * 100000);
+  let OTP = parseInt(Math.random() * 100000);
+  while (OTP.toString().length < 5) {
+    OTP = parseInt(Math.random() * 100000);
+  }
   return OTP;
 };
 //sengin otp

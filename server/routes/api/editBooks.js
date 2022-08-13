@@ -2,7 +2,8 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const Book = require("../../models/Book");
-
+const multer = require("multer");
+const { v4 } = require("uuid");
 router.use((req, res, next) => {
   if (req.user && req.user?.isAdmin) {
     return next();
@@ -35,16 +36,41 @@ const validationMiddlewares = [
     .withMessage("Stock value must be numeric"),
 ];
 
-//add a new book
-router.post("/add", validationMiddlewares, async (req, res) => {
+//add a new
+const DIR = "./images/books";
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, DIR);
+  },
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.toLowerCase().split(" ").join("-");
+    cb(null, v4() + "-" + fileName);
+  },
+});
+var upload = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+    }
+  },
+});
+router.post("/add", upload.single("image"), async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json(errors);
   }
-  const { title, price, category, description, image, reviews, stock } =
-    req.body;
-
-  const book = new Book(req.body);
+  const book = new Book({
+    ...req.body,
+    image: "/images/books" + req.file.filename,
+  });
   try {
     const bookDb = await book.save();
     res.status(200).json(bookDb);

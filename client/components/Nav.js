@@ -34,6 +34,16 @@ const Nav = () => {
   if (showUserDetails) {
     window.onmousedown = () => setShowUserDetails(() => false);
   }
+  const currentTab = () => {
+    console.log(router.asPath);
+    if (router.asPath.includes("comics")) return "comics";
+    else if (router.asPath.includes("novels")) return "novels";
+    else if (router.asPath.includes("finance")) return "finance";
+    else if (router.asPath.includes("selfhelp")) return "selfhelp";
+    else if (router.asPath.includes("novels")) return "novels";
+    else return "home";
+  };
+  console.log(currentTab());
   return (
     <>
       <nav className={styles.nav} ref={navRef}>
@@ -92,13 +102,26 @@ const Nav = () => {
       </nav>
       {/* Linksssssssssss--------- */}
       <div className={styles.navLinks}>
-        <a href="#" className={styles.active}>
-          Home
-        </a>
-        <Link href="/category/comics">Comics</Link>
-        <Link href="/category/finance">Finance</Link>
-        <a href="/category/selfhelp">Self help</a>
-        <a href="/category/novels">Novels</a>
+        <p className={currentTab() === "home" && styles.active}>
+          <Link href="/">Home</Link>
+        </p>
+        <p className={currentTab() === "comics" && styles.active}>
+          <Link href="/category/comics">Comics</Link>
+        </p>
+        <p className={currentTab() === "finance" && styles.active}>
+          <Link href="/category/finance">Finance</Link>
+        </p>
+        <p className={currentTab() === "selfhelp" && styles.active}>
+          <Link href="/category/selfhelp">Self help</Link>
+        </p>
+        <p className={currentTab() === "novels" && styles.active}>
+          <Link
+            href="/category/novels"
+            className={currentTab() === "novels" && styles.active}
+          >
+            Novels
+          </Link>
+        </p>
       </div>
     </>
   );
