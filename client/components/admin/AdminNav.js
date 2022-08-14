@@ -37,7 +37,7 @@ const Nav = () => {
   return (
     <>
       <nav className={styles.nav} ref={navRef}>
-        <Link href={"/"}>
+        <Link href={"/admin"}>
           <div className={styles.logo}>Kitaab</div>
         </Link>
         <div className={styles.searchWrapper}>

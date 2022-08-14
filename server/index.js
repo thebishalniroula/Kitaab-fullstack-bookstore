@@ -34,7 +34,7 @@ app.use(cookieParser(process.env.SESSION_SECRET));
 //Enabling body parsing
 app.use(express.json());
 console.log(__dirname);
-app.use("/public", express.static(path.join(__dirname, "images/books")));
+app.use("/images/books", express.static(path.join(__dirname, "images/books")));
 //Passport setup
 app.use(passport.initialize());
 app.use(passport.session());

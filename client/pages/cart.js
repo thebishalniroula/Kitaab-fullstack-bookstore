@@ -89,7 +89,14 @@ const cart = () => {
                     </p>
                   </div>
                   <div className={styles.imageWrapper}>
-                    <Image src={item.image} layout="fill" />
+                    <Image
+                      src={
+                        item.image.includes("http")
+                          ? item.image
+                          : `${process.env.NEXT_PUBLIC_BASE_URL}${item.image}`
+                      }
+                      layout="fill"
+                    />
                   </div>
                 </div>
               );

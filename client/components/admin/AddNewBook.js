@@ -1,94 +1,125 @@
 import React, { useRef, useState } from "react";
 import styles from "../../styles/admin/AddNewBook.module.css";
+import BookCard from "../BookCard";
 
 const AddNewBook = () => {
-  // const [formData, setFormData] = useState({});
   const imageRef = useRef(null);
   const formRef = useRef(null);
-  // const handleOnChange = (e) => {
-  //   setFormData((prev) => {
-  //     return { ...prev };
-  //   });
-  // };
+  const [addedBooks, setAddedBooks] = useState([]);
+  const [message, setMessage] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(formRef.current);
-    const data = new FormData(formRef.current);
-    console.log(...data);
+    const formData = new FormData(formRef.current);
+    for (const [key, value] of formData) {
+      console.log(key, value);
+      if (key !== "image" && value === "") {
+        setMessage("Please input all fields");
+        return;
+      }
+      if (key === "image" && value.name === "") {
+        setMessage("Please upload an image.");
+      }
+    }
+    if (message !== "") {
+      return;
+    }
     (async () => {
       const res = await fetch("http://localhost:5000/api/books/admin/add", {
         method: "POST",
         credentials: "include",
-        headers: {},
-        body: data,
+        body: formData,
       });
       const data = await res.json();
-      console.log(data);
+      if (data.status === "success") {
+        setAddedBooks((prev) => [...prev, data.message]);
+        formRef.current.reset();
+      } else if (data.status === "error") {
+        setMessage(() => data.message);
+      }
+      console.log(...formData);
     })();
   };
   const handleOnChange = () => {};
   return (
-    <div className={styles.container}>
-      <form
-        className={styles.form}
-        encType="multipart/form-data"
-        ref={formRef}
-        onSubmit={handleSubmit}
-      >
-        <div>
-          <label>Book title</label>
-          <input
-            name="title"
-            type="text"
-            placeholder="Ice and fire"
-            onChange={handleOnChange}
-          />
+    <>
+      <p className={styles.message}>{message}</p>
+      <div className={styles.container}>
+        <form
+          className={styles.form}
+          encType="multipart/form-data"
+          ref={formRef}
+          onSubmit={handleSubmit}
+        >
+          <h2>Add new book</h2>
+          <div>
+            <label>Book title</label>
+            <input
+              name="title"
+              type="text"
+              placeholder="Eg: Ice and fire"
+              onChange={handleOnChange}
+            />
+          </div>
+          <div>
+            <label>Description</label>
+            <textarea
+              name="description"
+              type="text"
+              placeholder="Eg: Description"
+            />
+          </div>
+          <div>
+            <label>Authors</label>
+            <input
+              name="authors"
+              type="text"
+              placeholder="Eg: Bishal Niroula, Mohan Bisunke"
+            />
+          </div>
+          <div>
+            <label>Category</label>
+            <select name="category">
+              <option value="UNCATEGORISED">Uncategorised</option>
+              <option value="COMICS">Comics</option>
+              <option value="NOVELS">Novels</option>
+              <option value="FINANCE">Finance</option>
+              <option value="SELFHELP">Self help</option>
+            </select>
+          </div>
+          <div>
+            <label>Price(NRs)</label>
+            <input type="number" placeholder="Eg: 1200" name="price" />
+          </div>
+          <div>
+            <label>Stock</label>
+            <input type="number" placeholder="Eg: 100" name="stock" />
+          </div>
+          <div>
+            <label>Image</label>
+            <input
+              type="file"
+              accept="image/png, image/gif, image/jpeg"
+              ref={imageRef}
+              name="image"
+              className={styles.customFileInput}
+            />
+          </div>
+          <button className={styles.submit} onClick={handleSubmit}>
+            {" "}
+            Submit
+          </button>
+        </form>
+        <div className={styles.sidebar}>
+          <h3>Recently added</h3>
+          <p className={styles.na}>No books added recently</p>
+          <div className={styles.recentlyAddedWrapper}>
+            {addedBooks.length > 0 && (
+              <BookCard books={addedBooks} type="admin" />
+            )}
+          </div>
         </div>
-        <div>
-          <label>Description</label>
-          <textarea name="description" type="text" placeholder="Description" />
-        </div>
-        <div>
-          <label>Authors</label>
-          <input
-            name="authors"
-            type="text"
-            placeholder="Bishal Niroula, Mohan"
-          />
-        </div>
-        <div>
-          <label>Category</label>
-          <select name="category">
-            <option value="uncategorised">Uncategorised</option>
-            <option value="comics">Comics</option>
-            <option value="novels">Novels</option>
-            <option value="finance">Finance</option>
-            <option value="selfhelp">Self help</option>
-          </select>
-        </div>
-        <div>
-          <label>Price(NRs)</label>
-          <input type="number" placeholder="1200" name="price" />
-        </div>
-        <div>
-          <label>Stock</label>
-          <input type="number" placeholder="100" name="stock" />
-        </div>
-        <div>
-          <label>Image</label>
-          <input
-            type="file"
-            accept="image/png, image/gif, image/jpeg"
-            ref={imageRef}
-            name="image"
-          />
-        </div>
-        <button className={styles.submit} onClick={handleSubmit}>
-          {" "}
-          Submit
-        </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 

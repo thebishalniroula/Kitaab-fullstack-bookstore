@@ -15,11 +15,12 @@ router.use((req, res, next) => {
 
 const validationMiddlewares = [
   check("title").notEmpty().withMessage("Title cannot be empty"),
+  check("authors").notEmpty().withMessage("Authors cannot be empty"),
   check("price")
     .notEmpty()
     .withMessage("Price cannot be empty")
-    .isNumeric()
     .not()
+    .isNumeric()
     .withMessage("Price must be a numeric value in Rupees"),
   check("category")
     .matches(
@@ -31,8 +32,8 @@ const validationMiddlewares = [
   check("stock")
     .notEmpty()
     .withMessage("Please mention available stocks of book.")
-    .isNumeric()
     .not()
+    .isNumeric()
     .withMessage("Stock value must be numeric"),
 ];
 
@@ -62,25 +63,31 @@ var upload = multer({
     }
   },
 });
-router.post("/add", upload.single("image"), async (req, res) => {
-  const errors = validationResult(req);
-  console.log(req.file);
-  console.log(req.body);
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors);
+router.post(
+  "/add",
+  validationMiddlewares,
+  upload.single("image"),
+  async (req, res) => {
+    console.log("body", req.body);
+    const errors = validationResult(req.body);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ status: "error", message: errors[0] });
+    }
+    const authors = req.body.authors.split(",");
+    const book = new Book({
+      ...req.body,
+      authors,
+      image: "/images/books/" + req.file.filename,
+    });
+    console.log(book);
+    try {
+      const bookDb = await book.save();
+      res.status(200).json({ status: "success", message: bookDb });
+    } catch (error) {
+      res.status(400).json({ status: "error", message: error });
+    }
   }
-  const book = new Book({
-    ...req.body,
-    image: "/images/books" + req.file.filename,
-  });
-  console.log(book);
-  try {
-    const bookDb = await book.save();
-    res.status(200).json(bookDb);
-  } catch (error) {
-    res.status(400).json({ status: "error", message: error });
-  }
-});
+);
 
 //edit an existing book
 const existingValidationMiddlewares = [

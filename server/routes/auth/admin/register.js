@@ -14,6 +14,11 @@ mongoose.connect("mongodb://127.0.0.1:27017/newappusers", (err) => {
 const questions = [
   {
     type: "input",
+    name: "name",
+    message: "Enter admin name.",
+  },
+  {
+    type: "input",
     name: "email",
     message: "Enter admin email.",
   },
@@ -25,14 +30,14 @@ const questions = [
 ];
 
 //Registering new admin
-const createADmin = async (email, plainPassword) => {
+const createADmin = async (name, email, plainPassword) => {
   const password = await bcrypt.hash(plainPassword, 10);
   const adminDB = await Admin.findOne({ email });
   if (adminDB) {
     console.log("Admin already registered");
   }
 
-  const admin = new Admin({ email, password });
+  const admin = new Admin({ name, email, password });
   try {
     const newAdmin = await admin.save();
     if (newAdmin) {
@@ -44,6 +49,7 @@ const createADmin = async (email, plainPassword) => {
   }
 };
 // Reading values from terminal
-inquirer.prompt(questions).then(({ email, password }) => {
-  createADmin(email, password);
+inquirer.prompt(questions).then(({ name, email, password }) => {
+  console.log("name", name);
+  createADmin(name, email, password);
 });

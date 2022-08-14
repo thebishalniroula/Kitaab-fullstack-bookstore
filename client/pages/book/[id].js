@@ -25,6 +25,7 @@ const ProductPage = () => {
         }
       );
       const data = await res.json();
+
       if (user?.cartItems.length > 0) {
         user.cartItems.map((item) => {
           if (item.bookId === data.message._id) {
@@ -45,7 +46,7 @@ const ProductPage = () => {
     })();
 
     ///
-  }, [router.isReady, user]);
+  }, [router.isReady, user, router.asPath]);
 
   useEffect(() => {
     if (book.reviews) {
@@ -63,12 +64,11 @@ const ProductPage = () => {
       setOtherReviews(otherReviews);
     }
   }, [book]);
-
+  console.log(book.authors);
   if (book)
     return (
       <>
         <div className={styles.container}>
-          {/* <pre>{JSON.stringify(book.reviews)}</pre> */}
           <div className={styles.bookDetails}>
             <h2 className={styles.title}>{book.title}</h2>
             <p className={styles.authors}>
@@ -101,7 +101,16 @@ const ProductPage = () => {
           </div>
           <div className={styles.image}>
             <div className={styles.imageWrapper}>
-              {book.image && <Image src={book.image} layout="fill"></Image>}
+              {book.image && (
+                <Image
+                  src={
+                    book.image.includes("http")
+                      ? book.image
+                      : `${process.env.NEXT_PUBLIC_BASE_URL}${book.image}`
+                  }
+                  layout="fill"
+                ></Image>
+              )}
             </div>
           </div>
         </div>

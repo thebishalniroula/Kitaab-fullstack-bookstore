@@ -14,10 +14,13 @@
 .author {
   color: #b9babd;
   font-size: 0.8rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  width: 10rem;
 }
 .imageWrapper {
   position: relative;
-  width: 100%;
   background-color: #b9babd;
   height: 15rem;
   width: 10rem;

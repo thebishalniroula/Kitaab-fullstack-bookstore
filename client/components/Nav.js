@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 const Nav = () => {
   const navRef = useRef(null);
+  const [searchResult, setSearchResult] = useState([]);
   const router = useRouter();
   const { user, setUser } = useContext(UserContext);
   const [showUserDetails, setShowUserDetails] = useState(false);
@@ -43,7 +44,21 @@ const Nav = () => {
     else if (router.asPath.includes("novels")) return "novels";
     else return "home";
   };
-  console.log(currentTab());
+
+  const handleOnChange = async (e) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/search/${e.target.value}`,
+      {
+        credentials: "include",
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+    console.log(data.message);
+
+    if (data.status === "success") setSearchResult(() => data.message);
+  };
+  console.log("searchResult", searchResult);
   return (
     <>
       <nav className={styles.nav} ref={navRef}>
@@ -56,7 +71,33 @@ const Nav = () => {
               type="text"
               className={styles.searchField}
               placeholder="Search by title or author"
+              onChange={handleOnChange}
             />
+            <div className={styles.searchList}>
+              {searchResult.map((item) => {
+                return (
+                  <Link href={`/book/${item._id}`}>
+                    <div className={styles.searchItem}>
+                      <Image
+                        src={
+                          item.image.includes("http")
+                            ? item.image
+                            : `${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`
+                        }
+                        height={90}
+                        width={60}
+                      ></Image>
+                      <div className={styles.bookData}>
+                        <p className={styles.searchTitle}>{item.title}</p>
+                        <p className={styles.authors}>
+                          {item.authors.join(", ")}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
         <div className={styles.userInfo}>

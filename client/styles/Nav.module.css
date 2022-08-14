@@ -149,3 +149,31 @@
   display: block;
   border-radius: 9999px;
 }
+.searchList {
+  display: none;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background-color: rgb(240, 238, 238);
+  max-height: 50vh;
+  overflow-y: scroll;
+  cursor: pointer;
+}
+.searchTitle {
+  color: rgb(140, 134, 134);
+}
+.authors {
+  color: rgb(193, 192, 192);
+}
+.searchItem {
+  display: flex;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 2px solid rgba(91, 89, 89, 0.573);
+}
+
+.nav input[type="text"]:focus + .searchList,
+.searchList:hover {
+  display: block;
+}

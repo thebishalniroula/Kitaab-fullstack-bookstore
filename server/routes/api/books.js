@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Book = require("../../models/Book");
-
+const mongoose = require("mongoose");
 router.use((req, res, next) => {
   if (req.user) {
     return next();
@@ -29,8 +29,18 @@ router.get("/", async (req, res) => {
 //get book by id
 router.get("/:bookId", async (req, res) => {
   const id = req.params.bookId;
-  const book = await Book.findById(id).populate("reviews.userId", "name email");
-  return res.status(200).json({ status: "success", message: book });
+  if (mongoose.isValidObjectId(id)) {
+    const book = await Book.findById(id).populate(
+      "reviews.userId",
+      "name email"
+    );
+    return res.status(200).json({ status: "success", message: book });
+  } else {
+    return res.json({
+      status: "error",
+      message: "Please enter a valid objexctID",
+    });
+  }
 });
 
 //get book by category
@@ -38,6 +48,17 @@ router.get("/category/:category", async (req, res) => {
   const category = req.params.category.toUpperCase();
   const books = await Book.find({ category });
   return res.status(200).json({ status: "success", message: books });
+});
+
+router.get("/search/:query", async (req, res) => {
+  const query = req.params.query;
+  try {
+    const books = await Book.find({ title: new RegExp(query, "i") });
+    return res.status(200).json({ status: "success", message: books });
+  } catch (err) {
+    console.log(err);
+    return res.status(200).json({ status: "error", message: err.message });
+  }
 });
 
 module.exports = router;
