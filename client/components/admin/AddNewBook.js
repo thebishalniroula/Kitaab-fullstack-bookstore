@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/admin/AddNewBook.module.css";
 import BookCard from "../BookCard";
 
@@ -7,6 +7,19 @@ const AddNewBook = () => {
   const formRef = useRef(null);
   const [addedBooks, setAddedBooks] = useState([]);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/books`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.status === "success") {
+        setAddedBooks(() => data.message.slice(-10).reverse());
+      }
+    })();
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(formRef.current);
@@ -31,7 +44,7 @@ const AddNewBook = () => {
       });
       const data = await res.json();
       if (data.status === "success") {
-        setAddedBooks((prev) => [...prev, data.message]);
+        setAddedBooks((prev) => [data.message, ...prev]);
         formRef.current.reset();
       } else if (data.status === "error") {
         setMessage(() => data.message);
@@ -84,6 +97,7 @@ const AddNewBook = () => {
               <option value="NOVELS">Novels</option>
               <option value="FINANCE">Finance</option>
               <option value="SELFHELP">Self help</option>
+              <option value="EDUCATIONAL">Educational</option>
             </select>
           </div>
           <div>
@@ -111,7 +125,9 @@ const AddNewBook = () => {
         </form>
         <div className={styles.sidebar}>
           <h3>Recently added</h3>
-          <p className={styles.na}>No books added recently</p>
+          {addedBooks.length === 0 && (
+            <p className={styles.na}>No books added recently</p>
+          )}
           <div className={styles.recentlyAddedWrapper}>
             {addedBooks.length > 0 && (
               <BookCard books={addedBooks} type="admin" />

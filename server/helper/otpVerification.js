@@ -7,6 +7,7 @@ module.exports.generateOtp = () => {
   while (OTP.toString().length < 5) {
     OTP = parseInt(Math.random() * 100000);
   }
+  console.log("OTP", OTP);
   return OTP;
 };
 //sengin otp
@@ -25,13 +26,17 @@ const sendotp = async (email, otp) => {
       console.log("Server is ready to take your messages");
     }
   });
-  await transporter.sendMail({
-    from: `"OTP verification" <${process.env.EMAIL}>`,
-    to: email,
-    subject: "Please verify your OTP",
-    text: "Please use this otp to verify its you",
-    html: `<div style="min-height: 200px; background-color: #3d5880; color: white; align-text: center; padding: 10%"><h1>Please use this OTP to sign in as admin</h1>
-    <h2>Your OTP: <span style="background-color:#525c6b">${otp}</span></h2></div>`,
-  });
+  try {
+    await transporter.sendMail({
+      from: `"OTP verification" <${process.env.EMAIL}>`,
+      to: email,
+      subject: "Please verify your OTP",
+      text: "Please use this otp to verify its you",
+      html: `<div style="min-height: 200px; background-color: #3d5880; color: white; align-text: center; padding: 10%"><h1>Please use this OTP to sign in as admin</h1>
+      <h2>Your OTP: <span style="background-color:#525c6b">${otp}</span></h2></div>`,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 module.exports.sendotp = sendotp;

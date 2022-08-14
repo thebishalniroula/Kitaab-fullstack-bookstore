@@ -6,6 +6,10 @@
   margin-top: 2rem;
   padding: 0 5%;
 }
+.container p {
+  width: 10rem;
+  overflow: hidden;
+}
 .container h2,
 .container h3 {
   color: #252323;
@@ -21,7 +25,8 @@
 }
 .recentlyAddedWrapper {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .sidebar > h3 {
