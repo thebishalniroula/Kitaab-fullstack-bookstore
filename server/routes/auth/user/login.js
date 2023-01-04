@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
+const passport = require("../../../strategies/local");
 
 router.post("/", passport.authenticate("user"), (req, res) => {
   const { cartItems, email, isUser, name, _id } = req.user;

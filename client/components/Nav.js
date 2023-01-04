@@ -20,8 +20,8 @@ const Nav = () => {
     );
     const data = await res.json();
     if (data.status === "success") {
-      router.push("/login");
       setUser(null);
+      router.push("/login");
     }
   };
   const observer = new IntersectionObserver(
