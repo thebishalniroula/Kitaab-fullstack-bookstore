@@ -14,7 +14,10 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 }
 app.use(
   require("cors")({
-    origin: ["http://localhost:3000"],
+    origin: [
+      "http://localhost:3000",
+      "https://kitaab-thebishalniroula.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
