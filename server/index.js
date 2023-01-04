@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const passport = require("passport");
+const passport = require("./strategies/local");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");

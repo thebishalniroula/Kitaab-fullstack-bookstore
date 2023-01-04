@@ -51,6 +51,7 @@ const Login = () => {
       }
       const data = await res.json();
       if (data.status === "success") {
+        console.log(data.user);
         setUser(data.user);
       }
     } catch (error) {
