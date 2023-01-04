@@ -74,9 +74,9 @@ const Nav = () => {
               onChange={handleOnChange}
             />
             <div className={styles.searchList}>
-              {searchResult.map((item) => {
+              {searchResult.map((item, idx) => {
                 return (
-                  <Link href={`/book/${item._id}`}>
+                  <Link href={`/book/${item._id}`} key={idx}>
                     <div className={styles.searchItem}>
                       <Image
                         src={
