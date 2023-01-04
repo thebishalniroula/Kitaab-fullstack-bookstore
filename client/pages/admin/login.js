@@ -2,7 +2,7 @@ import styles from "../../styles/Login.module.css";
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useRouter } from "next/router";
-const login = () => {
+const Login = () => {
   const [message, setMessage] = useState("");
   const { user, setUser } = useContext(UserContext);
   const [showOtpBox, setShowOtpBox] = useState(false);
@@ -247,4 +247,4 @@ const login = () => {
     );
 };
 
-export default login;
+export default Login;

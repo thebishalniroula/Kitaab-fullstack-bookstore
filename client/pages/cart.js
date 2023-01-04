@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import styles from "../styles/Checkout.module.css";
 import Image from "next/image";
-const cart = () => {
+const Cart = () => {
   const { user, setUser } = useContext(UserContext);
   const [cart, setCart] = useState([]);
   useEffect(() => {
@@ -69,9 +69,9 @@ const cart = () => {
           )}
           {cart.length > 0 &&
             cart[0]?.image &&
-            cart.map((item) => {
+            cart.map((item, index) => {
               return (
-                <div className={styles.item}>
+                <div className={styles.item} key={index}>
                   <div className={styles.itemDetails}>
                     <p className={styles.itemTitle}>
                       {`${item.title} `} <span>(X{item.quantity})</span>
@@ -129,4 +129,4 @@ const cart = () => {
     );
 };
 
-export default cart;
+export default Cart;

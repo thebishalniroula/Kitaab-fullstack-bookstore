@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import BookCard from "../../components/BookCard";
 import { UserContext } from "../../context/UserContext";
 import styles from "../../styles/Category.module.css";
-const category = () => {
+const Category = () => {
   const router = useRouter();
   const { category } = router.query;
   const [books, setBooks] = useState([]);
@@ -42,4 +42,4 @@ const category = () => {
     );
 };
 
-export default category;
+export default Category;

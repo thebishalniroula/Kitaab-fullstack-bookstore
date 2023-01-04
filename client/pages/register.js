@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const register = () => {
+const Register = () => {
   const [message, setMessage] = useState("");
   const router = useRouter();
   const nameRef = useRef(null);
@@ -74,4 +74,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

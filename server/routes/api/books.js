@@ -4,6 +4,7 @@ const Book = require("../../models/Book");
 const mongoose = require("mongoose");
 router.use((req, res, next) => {
   if (req.user) {
+    console.log(req.user);
     return next();
   }
   return res

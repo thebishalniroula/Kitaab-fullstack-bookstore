@@ -4,7 +4,7 @@ import AddNewBook from "../../components/admin/AddNewBook";
 import { UserContext } from "../../context/UserContext";
 import styles from "../../styles/admin/Home.module.css";
 
-const index = () => {
+const Index = () => {
   const router = useRouter();
   const { user, setUser } = useContext(UserContext);
   const [currentTab, setCurrentTab] = useState("ANB");
@@ -43,4 +43,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Index;

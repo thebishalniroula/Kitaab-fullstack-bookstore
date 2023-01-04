@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  console.log("here");
   if (req.user) {
     const { cartItems, email, isUser, name, _id } = req.user;
     return res.json({

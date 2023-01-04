@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-const login = () => {
+const Login = () => {
   const [message, setMessage] = useState("");
 
   const { user, setUser } = useContext(UserContext);
@@ -100,4 +100,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

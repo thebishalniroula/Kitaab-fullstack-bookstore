@@ -13,13 +13,14 @@ const Slider = ({ popularBooks }) => {
   useEffect(() => {
     (async () => {
       const resPopularBooks = await fetch(
-        `http://localhost:5000/api/books/popularnow`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/popularnow`,
         {
           method: "GET",
           credentials: "include",
         }
       );
       const dataPB = await resPopularBooks.json();
+      console.log(dataPB);
       const newBooks = dataPB.message.map((book) => {
         let bookCopy = book;
         user.cartItems.map((item) => {

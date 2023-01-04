@@ -24,8 +24,9 @@ function MyApp({ Component, pageProps }) {
         } else if (
           !router.pathname.includes("/register") &&
           !router.pathname.includes("/admin")
-        )
+        ) {
           router.push("/login");
+        }
       } catch (error) {
         console.log(error);
       }
