@@ -20,7 +20,6 @@ const Slider = ({ popularBooks }) => {
         }
       );
       const dataPB = await resPopularBooks.json();
-      console.log(dataPB);
       const newBooks = dataPB.message.map((book) => {
         let bookCopy = book;
         user.cartItems.map((item) => {

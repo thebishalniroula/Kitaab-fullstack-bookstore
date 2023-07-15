@@ -78,6 +78,7 @@ router.post(
       ...req.body,
       authors,
       image: "/images/books/" + req.file.filename,
+      isPopularNow: true,
     });
     console.log(book);
     try {
